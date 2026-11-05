@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Gorkha Baptist Church — Membership Management</title>
+<title>Gorkha Christian Church — Membership Management</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -123,14 +123,14 @@ input.badDate{border-color:#c0392b!important;background:#fdecea!important}
 </style>
 </head>
 <body>
-<div id="login" class="login"><div class="loginbox"><img id="loginLogo" alt="Church logo"><h1 id="loginName">Gorkha Baptist Church</h1><p class="verse" id="loginVerse"></p>
+<div id="login" class="login"><div class="loginbox"><img id="loginLogo" alt="Church logo"><h1 id="loginName">Gorkha Christian Church</h1><p class="verse" id="loginVerse"></p>
 <div class="field"><label for="user">Username</label><input id="user" autocomplete="username" placeholder="Username"></div>
 <div class="field"><label for="pass">Password</label><input id="pass" type="password" autocomplete="current-password" placeholder="Password" onkeydown="if(event.key==='Enter')login()"></div>
 <button id="loginBtn" class="btn primary" style="width:100%" onclick="login()" disabled>Loading…</button>
 <p id="loginStatus" class="loginStatus">Preparing church database…</p></div></div>
 
 <div id="app" class="app">
-<aside class="side"><div class="brand"><img id="sideLogo" alt="Church logo"><b id="brandText">Gorkha Baptist Church</b></div><div class="nav">
+<aside class="side"><div class="brand"><img id="sideLogo" alt="Church logo"><b id="brandText">Gorkha Christian Church</b></div><div class="nav">
 <button class="active" data-page="dashboard">▦ Dashboard</button><button data-page="members">👥 Members</button><button data-page="families">⌂ Families</button><button data-page="departments">🏛 Departments</button><button data-page="events">📅 Events & Calendar</button><button data-page="history">🕓 Church History</button><button data-page="leaders">✝ Deacon Board</button><button data-page="churchWorkers">🛠 Church Workers</button><button data-page="paidWorkers">💰 Paid Workers</button><button data-page="demographics">◉ Demographics</button><button data-page="birthdays">🎂 Birthdays</button><button data-page="deaths">✚ Death Records</button><button data-page="reports">▤ Reports</button><button data-page="backup">💾 Backup & Restore</button><button data-page="settings">⚙ Church Settings</button>
 </div><button class="btn danger" style="width:100%;margin-top:10px" onclick="logout()">Log out</button><div class="sideFoot">MEMBERSHIP SYSTEM · OFFLINE<br><span style="font-size:9px;opacity:.75">Developed by Hegin Haokip · 9612338375</span></div></aside>
 <main class="main"><header class="top"><div><b id="pageTitle">Dashboard</b><div style="font-size:11px;color:var(--muted)">Church Membership & Records</div></div><span id="today"></span></header><div class="content">
@@ -164,7 +164,7 @@ input.badDate{border-color:#c0392b!important;background:#fdecea!important}
 <div id="departmentModal" class="modal" role="dialog" aria-modal="true"><div class="modalbox">
   <h2 id="deptModalTitle">Department</h2>
   <div class="formgrid">
-    <div class="field"><label for="deptName">Full Name</label><input id="deptName" placeholder="e.g. Baptist Men's Fellowship"></div>
+    <div class="field"><label for="deptName">Full Name</label><input id="deptName" placeholder="e.g. Christian Men's Fellowship"></div>
     <div class="field"><label for="deptCode">Code</label><input id="deptCode" placeholder="e.g. CMF"></div>
     <div class="field span2"><label for="deptDesc">Description</label><textarea id="deptDesc" rows="2" placeholder="Meeting day, purpose, notes..."></textarea></div>
   </div>
@@ -288,7 +288,7 @@ input.badDate{border-color:#c0392b!important;background:#fdecea!important}
 
 <section id="backup" class="page"><h2>Data Backup & Restore</h2><div class="backup"><div class="card backupbox"><div class="backupicon">💾</div><h3>Download Full Backup</h3><p>Includes members, photos, uploaded documents, death records and church settings.</p><button class="btn primary" onclick="backup()">Download Backup</button></div><div class="card backupbox"><div class="backupicon">↥</div><h3>Restore Backup</h3><p>Restore a previously saved JSON backup.</p><input id="restore" type="file" accept=".json" onchange="restoreBackup(event)"></div></div><div class="card" style="margin-top:16px"><h3>Backup Status</h3><div id="backupInfo"></div></div></section>
 
-<section id="settings" class="page"><h2>Church Settings</h2><div class="card"><div class="formgrid"><div class="field"><label for="setName">Church Name</label><input id="setName"></div><div class="field span2"><label for="setMotto">Motto / Tagline</label><input id="setMotto" style="font-style:italic" placeholder="e.g. With Distinctive Baptist Principle"></div><div class="field"><label for="setLoc">Location</label><input id="setLoc"></div><div class="field"><label for="setReg">Registration No.</label><input id="setReg" placeholder="e.g. REG/MN/2004/118"></div><div class="field"><label for="setEst">Year of Establishment</label><input id="setEst" type="number" min="1800" max="2100" placeholder="e.g. 1978"></div><div class="field"><label for="setEmail">Church Email</label><input id="setEmail" type="email" placeholder="office@church.org"></div><div class="field"><label for="setPhone">Mobile Phone No.</label><input id="setPhone" type="tel" placeholder="+91 XXXXX XXXXX"></div><div class="field"><label for="setP">Primary Colour</label><input id="setP" type="color"></div><div class="field"><label for="setA">Accent Colour</label><input id="setA" type="color"></div><div class="field span2"><label for="logoFile">Church Logo</label><input id="logoFile" type="file" accept="image/*" onchange="changeLogo(event)"></div></div><button class="btn primary" onclick="saveSettings()">Save Settings</button><button class="btn light" onclick="resetData()">Reset Demo Data</button></div>
+<section id="settings" class="page"><h2>Church Settings</h2><div class="card"><div class="formgrid"><div class="field"><label for="setName">Church Name</label><input id="setName"></div><div class="field span2"><label for="setMotto">Motto / Tagline</label><input id="setMotto" style="font-style:italic" placeholder="e.g. Your church motto or tagline"></div><div class="field"><label for="setLoc">Location</label><input id="setLoc"></div><div class="field"><label for="setReg">Registration No.</label><input id="setReg" placeholder="e.g. REG/MN/2004/118"></div><div class="field"><label for="setEst">Year of Establishment</label><input id="setEst" type="number" min="1800" max="2100" placeholder="e.g. 1978"></div><div class="field"><label for="setEmail">Church Email</label><input id="setEmail" type="email" placeholder="office@church.org"></div><div class="field"><label for="setPhone">Mobile Phone No.</label><input id="setPhone" type="tel" placeholder="+91 XXXXX XXXXX"></div><div class="field"><label for="setP">Primary Colour</label><input id="setP" type="color"></div><div class="field"><label for="setA">Accent Colour</label><input id="setA" type="color"></div><div class="field span2"><label for="logoFile">Church Logo</label><input id="logoFile" type="file" accept="image/*" onchange="changeLogo(event)"></div></div><button class="btn primary" onclick="saveSettings()">Save Settings</button><button class="btn light" onclick="resetData()">Reset Demo Data</button></div>
 
 <div class="card" style="margin-top:16px"><h3>Login & Security</h3><p style="color:var(--muted);font-size:12px;margin-top:-6px">Your password is never stored in plain text — only a one-way cryptographic hash is saved.</p><div class="formgrid"><div class="field"><label for="curPass">Current Password</label><input id="curPass" type="password" autocomplete="current-password"></div><div class="field"><label for="newUser">Username</label><input id="newUser" autocomplete="username"></div><div class="field"><label for="newPass">New Password</label><input id="newPass" type="password" autocomplete="new-password" placeholder="Leave blank to keep current"></div><div class="field"><label for="confirmPass">Confirm New Password</label><input id="confirmPass" type="password" autocomplete="new-password"></div></div><button class="btn primary" onclick="changeCredentials()">Update Login Credentials</button></div>
 
@@ -300,7 +300,7 @@ input.badDate{border-color:#c0392b!important;background:#fdecea!important}
 <div class="field"><label for="mId">Member ID *</label><input id="mId" required><div class="errmsg">This Member ID is already in use.</div></div>
 <div class="field"><label for="mName">Full Name *</label><input id="mName" required></div>
 <div class="field"><label for="mPhoto">Passport Photo</label><input id="mPhoto" type="file" accept="image/jpeg,image/png,image/webp" onchange="previewPhoto(event)"><div id="photoPreview"></div></div>
-<div class="field"><label for="mGender">Gender</label><select id="mGender"><option>Female</option><option>Male</option><option>Other</option></select></div><div class="field"><label for="mDob">Date of Birth</label><input id="mDob" type="date"></div><div class="field"><label for="mPhone">Phone</label><input id="mPhone"></div><div class="field"><label for="mEmail">Email</label><input id="mEmail" type="email"></div><div class="field"><label for="mFamily">Family</label><input id="mFamily"></div><div class="field"><label for="mFatherName">Father's Name</label><input id="mFatherName"></div><div class="field"><label for="mMotherName">Mother's Name</label><input id="mMotherName"></div><div class="field"><label for="mCertNo">Birth Certificate No.</label><input id="mCertNo" placeholder="e.g. 319"></div><div class="field"><label for="mMarital">Marital Status</label><select id="mMarital"><option>Single</option><option>Married</option><option>Widowed</option><option>Widower</option><option>Divorced</option></select></div><div class="field"><label for="mBaptism">Baptism Date</label><input id="mBaptism" type="date"></div><div class="field"><label for="mBaptismMinister">Baptism Minister</label><input id="mBaptismMinister"></div><div class="field"><label for="mDedication">Dedication Date</label><input id="mDedication" type="date"></div><div class="field"><label for="mDedicationMinister">Dedication Minister</label><input id="mDedicationMinister"></div><div class="field"><label for="mMarriageDate">Marriage Date</label><input id="mMarriageDate" type="date"></div><div class="field"><label for="mMarriageMinister">Marriage Minister</label><input id="mMarriageMinister"></div><div class="field"><label for="mMarriageType">Marriage Type</label><select id="mMarriageType"><option value=""></option><option>Holy Marriage</option><option>Re-affirmed/simple marriage</option><option>Love Marriage</option><option>Court Marriage</option><option>Others</option></select></div><div class="field"><label for="mMarriagePlace">Marriage Place</label><input id="mMarriagePlace" placeholder="e.g. Gorkha Baptist Church"></div><div class="field"><label for="mJoin">Membership Date</label><input id="mJoin" type="date"></div><div class="field"><label for="mOccupation">Occupation</label><input id="mOccupation"></div><div class="field"><label for="mEducation">Education</label><input id="mEducation"></div><div class="field"><label for="mNextKin">Next of Kin</label><input id="mNextKin"></div><div class="field"><label for="mKinRelation">Relationship</label><input id="mKinRelation"></div><div class="field"><label for="mLocation">Village / Town</label><input id="mLocation"></div><div class="field span2"><label for="mAddress">Home Address</label><input id="mAddress" placeholder="e.g. House no., Locality, District, State 795002"></div><div class="field"><label for="mStatus">Status</label><select id="mStatus"><option>Active Member</option><option>Associate Member</option><option>Minor Member</option><option>Inactive</option><option>Transferred</option></select></div>
+<div class="field"><label for="mGender">Gender</label><select id="mGender"><option>Female</option><option>Male</option><option>Other</option></select></div><div class="field"><label for="mDob">Date of Birth</label><input id="mDob" type="date"></div><div class="field"><label for="mPhone">Phone</label><input id="mPhone"></div><div class="field"><label for="mEmail">Email</label><input id="mEmail" type="email"></div><div class="field"><label for="mFamily">Family</label><input id="mFamily"></div><div class="field"><label for="mFatherName">Father's Name</label><input id="mFatherName"></div><div class="field"><label for="mMotherName">Mother's Name</label><input id="mMotherName"></div><div class="field"><label for="mCertNo">Birth Certificate No.</label><input id="mCertNo" placeholder="e.g. 319"></div><div class="field"><label for="mMarital">Marital Status</label><select id="mMarital"><option>Single</option><option>Married</option><option>Widowed</option><option>Widower</option><option>Divorced</option></select></div><div class="field"><label for="mBaptism">Baptism Date</label><input id="mBaptism" type="date"></div><div class="field"><label for="mBaptismMinister">Baptism Minister</label><input id="mBaptismMinister"></div><div class="field"><label for="mDedication">Dedication Date</label><input id="mDedication" type="date"></div><div class="field"><label for="mDedicationMinister">Dedication Minister</label><input id="mDedicationMinister"></div><div class="field"><label for="mMarriageDate">Marriage Date</label><input id="mMarriageDate" type="date"></div><div class="field"><label for="mMarriageMinister">Marriage Minister</label><input id="mMarriageMinister"></div><div class="field"><label for="mMarriageType">Marriage Type</label><select id="mMarriageType"><option value=""></option><option>Holy Marriage</option><option>Re-affirmed/simple marriage</option><option>Love Marriage</option><option>Court Marriage</option><option>Others</option></select></div><div class="field"><label for="mMarriagePlace">Marriage Place</label><input id="mMarriagePlace" placeholder="e.g. Gorkha Christian Church"></div><div class="field"><label for="mJoin">Membership Date</label><input id="mJoin" type="date"></div><div class="field"><label for="mOccupation">Occupation</label><input id="mOccupation"></div><div class="field"><label for="mEducation">Education</label><input id="mEducation"></div><div class="field"><label for="mNextKin">Next of Kin</label><input id="mNextKin"></div><div class="field"><label for="mKinRelation">Relationship</label><input id="mKinRelation"></div><div class="field"><label for="mLocation">Village / Town</label><input id="mLocation"></div><div class="field span2"><label for="mAddress">Home Address</label><input id="mAddress" placeholder="e.g. House no., Locality, District, State 795002"></div><div class="field"><label for="mStatus">Status</label><select id="mStatus"><option>Active Member</option><option>Associate Member</option><option>Minor Member</option><option>Inactive</option><option>Transferred</option></select></div>
 <div class="field"><label for="mTransferDirection">Transfer Direction</label><select id="mTransferDirection"><option value="">Not Applicable</option><option>Transferred From Church</option><option>Transferred To Church</option></select></div>
 <div class="field"><label for="mTransferDate">Transfer Date</label><input id="mTransferDate" type="date"></div>
 <div class="field"><label for="mTransferChurch">Church Name</label><input id="mTransferChurch" placeholder="Name of church"></div>
@@ -331,7 +331,7 @@ input.badDate{border-color:#c0392b!important;background:#fdecea!important}
 
 <script>
 /* ============================================================
-   Gorkha Baptist Church — Membership Management System
+   Gorkha Christian Church — Membership Management System
    Desktop app. When running in Electron, records are persisted in
    SQLite and photos/documents are written to disk as plain files,
    referenced from the record by a short path string — nothing
@@ -352,7 +352,7 @@ const MAX_DOC_BYTES = 10 * 1024 * 1024;
 const PHOTO_MAX_DIM = 900;      // longest edge, px — plenty for on-screen thumbnails and printed ID cards
 const PHOTO_QUALITY = 0.82;     // JPEG quality after resize
 
-const DEFAULT_SETTINGS = { name: "Gorkha Baptist Church", motto: "", location: "", logo: "", primary: "#173b57", accent: "#2c8c8c", registrationNo: "", established: "", email: "", phone: "" };
+const DEFAULT_SETTINGS = { name: "Gorkha Christian Church", motto: "", location: "", logo: "", primary: "#173b57", accent: "#2c8c8c", registrationNo: "", established: "", email: "", phone: "" };
 function emptyData(){ return { members: [], deaths: [], families: [], leaders: [], churchWorkers: [], paidWorkers: [], departments: [], churchEvents: [], churchHistory: [], settings: { ...DEFAULT_SETTINGS }, auth: null }; }
 function isElectron(){ return !!(window.churchAPI && window.churchAPI.loadData); }
 function withTimeout(promise, ms, label){      // a hung IPC call (disk stuck, main process busy) used to leave the renderer's await stuck forever, which reads to the user as "the app is frozen" with no error, no toast, nothing to act on. Racing every main-process call against a timeout turns a silent hang into a visible, retryable error instead.
@@ -362,8 +362,8 @@ function withTimeout(promise, ms, label){      // a hung IPC call (disk stuck, m
 }
 
 /* ---------- storage layer (Electron + SQLite, browser/IndexedDB fallback) ---------- */
-const STORE_KEY = "gbcData";
-const IDB_NAME = "gbcChurchDb", IDB_STORE = "kv";
+const STORE_KEY = "gccData";
+const IDB_NAME = "gccChurchDb", IDB_STORE = "kv";
 let idbPromise = null;
 function idb(){
   if (idbPromise) return idbPromise;
@@ -610,9 +610,9 @@ async function boot(){
     if (!data.churchHistory) data.churchHistory = [];
     if (seedDepartments){
       data.departments = [
-        { _uid: uid(), id: "BMF", name: "Baptist Men's Fellowship", description: "", memberUids: [] },
-        { _uid: uid(), id: "BYF", name: "Baptist Youth Fellowship", description: "", memberUids: [] },
-        { _uid: uid(), id: "BWF", name: "Baptist Women's Fellowship", description: "", memberUids: [] }
+        { _uid: uid(), id: "CMF", name: "Christian Men's Fellowship", description: "", memberUids: [] },
+        { _uid: uid(), id: "CYF", name: "Christian Youth Fellowship", description: "", memberUids: [] },
+        { _uid: uid(), id: "CWF", name: "Christian Women's Fellowship", description: "", memberUids: [] }
       ];
     }
     data.departments.forEach(x => { if (!x._uid) x._uid = uid(); if (!x.memberUids) x.memberUids = []; });
@@ -794,7 +794,7 @@ $("memberRows").addEventListener("click", e => {
 });
 
 function blankMember(){
-  return { _uid: "", id: "GBC-" + String(data.members.length + 1).padStart(3, "0"), name: "", gender: "Female", dob: "", phone: "", email: "", family: "", fatherName: "", motherName: "", certNo: "", marital: "Single", baptism: "", baptismMinister: "", dedication: "", dedicationMinister: "", marriageDate: "", marriageMinister: "", marriageType: "", marriagePlace: "", join: "", occupation: "", education: "", nextKin: "", kinRelation: "", location: "", address: "", status: "Active Member", transferDirection: "", transferDate: "", transferReason: "", transferChurch: "", transferStatus: "", notes: "", documents: [], photo: "" };
+  return { _uid: "", id: "GCC-" + String(data.members.length + 1).padStart(3, "0"), name: "", gender: "Female", dob: "", phone: "", email: "", family: "", fatherName: "", motherName: "", certNo: "", marital: "Single", baptism: "", baptismMinister: "", dedication: "", dedicationMinister: "", marriageDate: "", marriageMinister: "", marriageType: "", marriagePlace: "", join: "", occupation: "", education: "", nextKin: "", kinRelation: "", location: "", address: "", status: "Active Member", transferDirection: "", transferDate: "", transferReason: "", transferChurch: "", transferStatus: "", notes: "", documents: [], photo: "" };
 }
 let pendingNewMemberUid = null;   // holds the uid of an in-progress (not yet saved) Add-Member record, so Cancel can clean up any photo/documents already written to disk this session
 function memberTimeline(m){                     // built from the member's own dated fields, plus a cross-check against the roster modules for "Became ..." milestones
@@ -1789,13 +1789,13 @@ async function backup(){
       const ok = await window.churchAPI.exportData();
       if (!ok) return;
     } else {
-      const obj = { app: "Gorkha Baptist Church Management System", version: "3.1", exportedAt: new Date().toISOString(), data: stripInternal(data) };
+      const obj = { app: "Gorkha Christian Church Management System", version: "3.1", exportedAt: new Date().toISOString(), data: stripInternal(data) };
       const blob = new Blob([JSON.stringify(obj, null, 2)], { type: "application/json" });
       const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
-      a.download = "Gorkha-Baptist-Church-Backup-" + new Date().toISOString().slice(0,10) + ".json";
+      a.download = "Gorkha-Christian-Church-Backup-" + new Date().toISOString().slice(0,10) + ".json";
       a.click(); URL.revokeObjectURL(a.href);
     }
-    localStorage.gbcLastBackup = new Date().toLocaleString(); backupInfo(); toast("Backup exported successfully.");
+    localStorage.gccLastBackup = new Date().toLocaleString(); backupInfo(); toast("Backup exported successfully.");
   }catch(err){ console.error(err); toast("Backup export failed.", true); }
 }
 function stripInternal(d){ return d; }  // kept as a hook in case internal fields should be excluded from exports later
@@ -1846,7 +1846,7 @@ async function restoreBackup(e){
 }
 function backupInfo(){
   const el = $("backupInfo");
-  if (el) el.innerHTML = `<p>Members: <b>${data.members.length}</b> · Death records: <b>${data.deaths.length}</b> · Last backup: <b>${esc(localStorage.gbcLastBackup || "Not yet")}</b></p>`;
+  if (el) el.innerHTML = `<p>Members: <b>${data.members.length}</b> · Death records: <b>${data.deaths.length}</b> · Last backup: <b>${esc(localStorage.gccLastBackup || "Not yet")}</b></p>`;
 }
 async function changeLogo(e){
   const f = e.target.files[0];
@@ -1922,7 +1922,7 @@ function exportCSV(){
   const blob = new Blob([[headers.map(q).join(","), ...rows].join("\n")], { type: "text/csv" });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = "Gorkha-Baptist-Church-Members.csv";
+  a.download = "Gorkha-Christian-Church-Members.csv";
   a.click();
   URL.revokeObjectURL(a.href);
 }
