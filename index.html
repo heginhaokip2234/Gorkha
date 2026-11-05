@@ -1,0 +1,2158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gorkha Baptist Church — Membership Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--p:#173b57;--p2:#0e2537;--a:#2c8c8c;--gold:#c99a3f;--bg:#f3f1ea;--card:#fff;--text:#22303e;--muted:#71818f;--line:#e7e2d6;--radius:16px;--shadow:0 10px 30px -8px #14344d1f,0 2px 8px #14344d0f;--serif:"Fraunces",Georgia,serif;--sans:"Inter",Segoe UI,Arial,sans-serif}
+*{box-sizing:border-box}body{margin:0;font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+h1,h2,h3,.brand b,.loginbox h1{font-family:var(--serif)}
+button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}
+.btn{border:0;border-radius:10px;padding:10px 15px;font-weight:600;font-size:13px;transition:transform .12s ease,box-shadow .12s ease,filter .12s ease}
+.btn:hover{filter:brightness(1.06);transform:translateY(-1px)}.btn:active{transform:translateY(0)}
+.primary{background:var(--p);color:#fff;box-shadow:0 6px 16px -6px #173b5766}.accent{background:var(--a);color:white}.light{background:#eef1ea;color:#3a4655;border:1px solid var(--line)}.danger{background:#f6e2e2;color:#8a2929}.gold{background:linear-gradient(135deg,var(--gold),#b6842f);color:#fff;box-shadow:0 6px 16px -6px #c99a3f66}
+.login{min-height:100vh;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at 20% 15%,#1c4a63,#0d2438 60%),linear-gradient(160deg,#0e2839,#1a3c4a 45%,#1f5352 100%)}
+.loginbox{width:min(430px,92vw);background:#fffdf9;border-radius:24px;padding:38px 34px;box-shadow:0 30px 80px #00000055;border:1px solid #ffffff30;text-align:center}
+.loginbox img{display:block;margin:auto;width:84px;height:84px;object-fit:contain;border-radius:50%;background:#f2f5f7;box-shadow:0 0 0 5px #f3f1ea}
+.loginbox h1{margin:16px 0 2px;font-size:24px;font-weight:600;color:var(--p2)}.loginbox .verse{font-style:italic;color:var(--muted);font-size:12px;margin:0 0 22px;line-height:1.5}
+.loginbox p{text-align:center;color:var(--muted);margin:6px 0}
+.loginbox .field{text-align:left}
+.loginStatus{text-align:center;font-size:12px;color:var(--muted);min-height:16px}
+.app{display:none;min-height:100vh}
+.side{position:fixed;inset:0 auto 0 0;width:250px;background:linear-gradient(190deg,var(--p2),#12324a);color:#dce9f1;padding:22px 16px;overflow-y:auto;display:flex;flex-direction:column}
+.brand{display:flex;gap:11px;align-items:center;padding:4px 6px 20px;border-bottom:1px solid #ffffff1c}.brand img{width:44px;height:44px;border-radius:50%;background:#fff;object-fit:contain;padding:2px}.brand b{font-size:15px;letter-spacing:.2px;line-height:1.2}
+.nav{margin-top:16px;flex:1}.nav button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:transparent;border:0;color:#c9d9e2;padding:11px 12px;border-radius:10px;margin:2px 0;font-size:13.5px;font-weight:500;position:relative;transition:background .15s,color .15s}
+.nav button::before{content:"";position:absolute;left:-16px;top:50%;transform:translateY(-50%);width:3px;height:0;background:var(--gold);border-radius:3px;transition:height .15s}
+.nav button.active,.nav button:hover{background:#ffffff14;color:#fff}.nav button.active::before{height:60%}
+.sideFoot{font-size:10px;color:#9db3c0;text-align:center;padding-top:14px;border-top:1px solid #ffffff1c;letter-spacing:.4px}
+.main{margin-left:250px}.top{height:70px;background:#fffefb;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:5}
+.top b{font-family:var(--serif);font-size:16px}
+.content{padding:26px 28px 40px}.page{display:none}.page.active{display:block;animation:fadeUp .28s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.page.active{animation:none}}
+.hero{background:linear-gradient(120deg,var(--p2),var(--p) 55%,var(--a));color:#fff;border-radius:20px;padding:26px 28px;display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:20px;flex-wrap:wrap;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.hero::after{content:"";position:absolute;right:-40px;top:-40px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,#ffffff22,transparent 70%)}
+.heroBrand{display:flex;align-items:center;gap:16px;position:relative}.heroBrand img{width:70px;height:70px;border-radius:50%;background:#fff;object-fit:contain;padding:5px;box-shadow:0 4px 14px #0004}
+.hero h2{margin:2px 0;font-size:25px;font-weight:600}.hero p{margin:0;opacity:.85;font-size:13px}.eyebrow{font-size:10px;letter-spacing:2px;font-weight:700;opacity:.8}
+.grid{display:grid;gap:16px}.stats{grid-template-columns:repeat(4,1fr)}.two{grid-template-columns:1.4fr 1fr}.three{grid-template-columns:repeat(3,1fr)}
+.card,.stat{background:var(--card);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);border:1px solid #ffffff}
+.rcard{border-left:4px solid transparent;transition:transform .15s ease,box-shadow .15s ease}
+.rcard:hover{transform:translateY(-3px);box-shadow:0 16px 36px -10px #14344d30}
+.rcard.cat-member{border-left-color:#3b6ea5}
+.rcard.cat-idcard{border-left-color:#8a5cb5}
+.rcard.cat-roster{border-left-color:#1f9c72}
+.report-section-title{display:flex;align-items:center;gap:9px;margin:26px 0 12px;font-family:var(--serif);font-size:17px;font-weight:600;color:var(--p2)}
+.report-section-title:first-of-type{margin-top:4px}
+.report-section-title .tag{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:4px 11px;border-radius:20px}
+.report-section-title.cat-member .tag{background:#e8f0fa;color:#2f5d8a}
+.report-section-title.cat-idcard .tag{background:#f1e9f7;color:#6d4694}
+.report-section-title.cat-roster .tag{background:#e3f6ee;color:#187a56}
+.rptperiod{border-left:4px solid var(--a)}
+.stat{display:flex;gap:14px;align-items:center;transition:transform .15s ease,box-shadow .15s ease}.stat:hover{transform:translateY(-2px);box-shadow:0 14px 34px -10px #14344d2e}
+.icon{width:46px;height:46px;border-radius:13px;background:linear-gradient(140deg,#e9f2f2,#dcecec);display:grid;place-items:center;font-size:20px;flex-shrink:0}
+.label{color:var(--muted);font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.4px}.num{font-family:var(--serif);font-size:30px;font-weight:600;line-height:1.1;margin:4px 0;color:var(--p2)}.stat small{color:var(--muted);font-size:10px}
+.cardtitle{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}.cardtitle h3{margin:0;font-size:16px;font-weight:600}.cardtitle small{color:var(--muted)}
+.quick{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.quick button{text-align:left;border:1px solid var(--line);background:#fbfaf6;border-radius:12px;padding:13px;transition:border-color .15s,transform .15s}.quick button:hover{border-color:var(--a);transform:translateY(-2px)}.quick b{display:block;font-size:13px}.quick small{color:var(--muted)}
+.toolbar{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:16px}.toolbar h2{font-size:20px;margin:0 0 2px}.right{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.search input{min-width:250px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff}.search input:focus{outline:2px solid var(--a);outline-offset:1px}
+.tablewrap{overflow:auto}.table{width:100%;border-collapse:collapse}.table th,.table td{padding:11px 10px;border-bottom:1px solid #eef0eb;text-align:left;font-size:12.5px}.table th{color:var(--muted);background:#faf9f4;position:sticky;top:0;font-weight:700;text-transform:uppercase;font-size:10.5px;letter-spacing:.4px}.table tbody tr{transition:background .12s}.table tbody tr:hover{background:#f7f8f4}
+.pill{background:#e7f2ea;color:#286b55;border-radius:20px;padding:4px 10px;font-size:10px;font-weight:700;letter-spacing:.2px}
+.thumb{width:38px;height:48px;object-fit:cover;border-radius:6px;border:1px solid var(--line);background:#eef2f5}
+.families{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.timeline{display:flex;flex-wrap:wrap;align-items:center;gap:0;margin:2px 0 16px;padding:14px 16px;background:#faf9f4;border:1px solid var(--line);border-radius:12px}
+.tl-item{display:flex;flex-direction:column;align-items:center;text-align:center;min-width:76px;padding:0 8px}
+.tl-dot{width:9px;height:9px;border-radius:50%;background:var(--a);margin-bottom:5px;box-shadow:0 0 0 3px #2c8c8c22}
+.tl-label{font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;font-weight:700}
+.tl-year{font-family:var(--serif);font-size:15px;font-weight:600;color:var(--p2);margin-top:1px}
+.tl-arrow{color:#c9c3af;font-size:14px;padding:0 2px}
+.tl-empty{font-size:12px;color:var(--muted)}
+.familycard{display:flex;flex-direction:column;transition:transform .15s ease,box-shadow .15s ease}.familycard:hover{transform:translateY(-2px);box-shadow:0 14px 34px -10px #14344d2e}
+.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.calendar .cal-dow{font-size:10px;font-weight:700;color:var(--muted);text-align:center;padding:4px 0;text-transform:uppercase}
+.calendar .cal-day{min-height:64px;border:1px solid #e9e9e2;border-radius:6px;padding:4px;font-size:11px;color:#556;position:relative;cursor:pointer}
+.calendar .cal-day:hover{background:#f7f7f2}
+.calendar .cal-day.other{opacity:.35}
+.calendar .cal-day.today{border-color:var(--p);border-width:2px}
+.calendar .cal-daynum{font-weight:700;font-size:11px}
+.calendar .cal-evt{margin-top:2px;background:var(--p);color:#fff;border-radius:4px;padding:1px 4px;font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.eventrow{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #f0f0ea;gap:10px}
+.eventrow:last-child{border-bottom:none}
+.eventrow .evdate{background:var(--p);color:#fff;border-radius:8px;padding:4px 9px;font-size:10px;font-weight:700;white-space:nowrap}
+.timeline{position:relative;padding-left:26px}
+.timeline::before{content:"";position:absolute;left:6px;top:4px;bottom:4px;width:2px;background:#e3e3da}
+.tl-item{position:relative;padding-bottom:22px;cursor:pointer}
+.tl-item:last-child{padding-bottom:0}
+.tl-item::before{content:"";position:absolute;left:-26px;top:3px;width:11px;height:11px;border-radius:50%;background:var(--p);border:2px solid #fff;box-shadow:0 0 0 2px #e3e3da}
+.tl-date{font-size:10px;font-weight:700;color:var(--p);text-transform:uppercase;letter-spacing:.3px}
+.tl-title{font-weight:700;margin:2px 0 3px}
+.tl-desc{font-size:12px;color:var(--muted)}
+.famthumbs{display:flex;min-height:38px;margin:2px 0 4px}
+.famthumbs img.thumb,.famthumbs .thumb.ph{width:34px;height:34px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 0 0 1px var(--line);margin-left:-10px}
+.famthumbs :first-child{margin-left:0}
+.familycard .right{margin-top:auto;padding-top:14px}
+.field{margin:10px 0}.field label{display:block;font-size:11.5px;font-weight:700;color:#546575;margin-bottom:5px;text-transform:uppercase;letter-spacing:.3px}
+.field input,.field select,.field textarea{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:9px;background:#fff}.field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--a);outline-offset:1px;border-color:var(--a)}
+.field .err{border-color:#c0392b}.errmsg{color:#c0392b;font-size:11px;margin-top:4px;display:none}.field.invalid .errmsg{display:block}
+.formgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:4px 14px}.span2{grid-column:span 2}
+.modal{display:none;position:fixed;inset:0;background:#0c1a2499;place-items:center;padding:18px;z-index:20;backdrop-filter:blur(2px)}.modal.show{display:grid}
+.modalbox{background:#fffefb;width:min(850px,97vw);max-height:92vh;overflow:auto;border-radius:18px;padding:26px;box-shadow:0 40px 90px #00000055}.modalbox h2{margin:0 0 14px;font-size:19px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}
+.doc{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 10px;background:#faf9f4;border:1px solid var(--line);border-radius:8px;margin-top:6px;font-size:11px}.doc span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.doc .docbtns{display:flex;gap:4px;flex-shrink:0}.doc button{border:0;border-radius:6px;padding:5px 7px;font-size:10px;background:#e7edf0}.doc .x{background:#f6e2e2;color:#8a2929}
+.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:7px}.day{min-height:92px;background:#fff;border-radius:11px;padding:8px;box-shadow:0 2px 8px #173b5712;border:1px solid #f1f0e9}.dow{min-height:auto;background:transparent;box-shadow:none;border:0;font-weight:700;color:var(--muted);font-size:11px;text-transform:uppercase}.birthday{display:block;background:#eaf5f2;color:#286b65;padding:4px 5px;border-radius:6px;font-size:10px;margin-top:4px;font-weight:600}
+.backup{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.backupbox{text-align:center;padding:30px}.backupicon{font-size:38px}.photo{width:105px;height:130px;object-fit:cover;border-radius:8px;border:1px solid var(--line);background:#f3f6f8}
+.toast{position:fixed;bottom:20px;right:20px;background:var(--p2);color:#fff;padding:12px 18px;border-radius:11px;font-size:13px;box-shadow:0 14px 34px #00000055;z-index:50;opacity:0;transform:translateY(8px);transition:opacity .2s,transform .2s;pointer-events:none}.toast.show{opacity:1;transform:translateY(0)}.toast.err{background:#8a2929}
+.heroRight{display:flex;align-items:center;gap:16px;position:relative;flex-wrap:wrap}.heroDate{text-align:right;line-height:1.25}.heroDate span{display:block;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;opacity:.8}.heroDate b{font-family:var(--serif);font-size:18px;font-weight:600}
+.stats5{grid-template-columns:repeat(5,1fr)}.stats5 .stat{cursor:pointer;padding:16px}.stats5 .num{font-size:28px}
+.stat .icon{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:21px;flex:none}
+.tint1 .icon{background:#dbe8f3}.tint2 .icon{background:#d9efe9}.tint3 .icon{background:#dceaf8}.tint4 .icon{background:#f6ead0}.tint5 .icon{background:#f3e1e1}
+.tint1{border-bottom:3px solid #3f7aa8}.tint2{border-bottom:3px solid #2c8c8c}.tint3{border-bottom:3px solid #5b8fd1}.tint4{border-bottom:3px solid var(--gold)}.tint5{border-bottom:3px solid #c9807a}
+.dashrow{grid-template-columns:1fr 1.2fr 1.2fr}
+.donutWrap{display:flex;align-items:center;gap:18px;flex-wrap:wrap}.donutWrap svg{flex:none}.legend{display:grid;gap:8px;font-size:13px}.legend i{display:inline-block;width:11px;height:11px;border-radius:4px;margin-right:7px;vertical-align:-1px}.legend b{margin-left:6px}
+.vbars{display:flex;align-items:flex-end;gap:14px;height:150px;padding-top:6px}.vbar{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;font-size:11px;color:var(--muted);text-align:center}.vbar .col{width:100%;max-width:54px;border-radius:9px 9px 3px 3px;background:linear-gradient(180deg,#3f7aa8,var(--p));min-height:3px}.vbar:nth-child(even) .col{background:linear-gradient(180deg,#e0b663,var(--gold))}.vbar b{color:var(--text);font-size:13px;margin-bottom:3px}
+.qa{grid-template-columns:repeat(2,1fr)}.qa button{padding:12px 13px}
+.glance{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.gcol h4{margin:0 0 8px;font-size:13px;color:var(--p2)}.grow{display:flex;justify-content:space-between;gap:8px;padding:7px 0;border-bottom:1px dashed var(--line);font-size:12.5px}.grow:last-child{border:0}.grow small{color:var(--muted);white-space:nowrap}.gempty{color:var(--muted);font-size:12px;padding:6px 0}
+.attn{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.attn button{border:1px solid var(--line);background:#fbfaf6;border-radius:12px;padding:12px 14px;text-align:left;transition:transform .15s,border-color .15s}.attn button:hover{transform:translateY(-2px);border-color:var(--gold)}.attn b{font-family:var(--serif);font-size:24px;display:block;color:var(--p2)}.attn small{color:var(--muted)}.attn .ok{border-color:#cfe5d6;background:#f1f8f3}.attn .ok b{color:#2f7d4f}
+@media(max-width:1200px){.stats5{grid-template-columns:repeat(3,1fr)}.dashrow{grid-template-columns:1fr 1fr}.glance,.attn{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:650px){.stats5,.dashrow,.glance,.attn{grid-template-columns:1fr}.heroDate{text-align:left}}
+@media(max-width:950px){.side{width:215px}.main{margin-left:215px}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:650px){.side{position:static;width:100%;height:auto}.main{margin-left:0}.top{position:static}.stats,.two,.three,.backup{grid-template-columns:1fr}.formgrid{grid-template-columns:1fr}.span2{grid-column:auto}.quick{grid-template-columns:1fr}.calendar{grid-template-columns:repeat(2,1fr)}}
+@media print{.side,.top,.toolbar,.noprint,.toast{display:none!important}.main{margin:0}.content{padding:0}}
+input.badDate{border-color:#c0392b!important;background:#fdecea!important}
+</style>
+</head>
+<body>
+<div id="login" class="login"><div class="loginbox"><img id="loginLogo" alt="Church logo"><h1 id="loginName">Gorkha Baptist Church</h1><p class="verse" id="loginVerse"></p>
+<div class="field"><label for="user">Username</label><input id="user" autocomplete="username" placeholder="Username"></div>
+<div class="field"><label for="pass">Password</label><input id="pass" type="password" autocomplete="current-password" placeholder="Password" onkeydown="if(event.key==='Enter')login()"></div>
+<button id="loginBtn" class="btn primary" style="width:100%" onclick="login()" disabled>Loading…</button>
+<p id="loginStatus" class="loginStatus">Preparing church database…</p></div></div>
+
+<div id="app" class="app">
+<aside class="side"><div class="brand"><img id="sideLogo" alt="Church logo"><b id="brandText">Gorkha Baptist Church</b></div><div class="nav">
+<button class="active" data-page="dashboard">▦ Dashboard</button><button data-page="members">👥 Members</button><button data-page="families">⌂ Families</button><button data-page="departments">🏛 Departments</button><button data-page="events">📅 Events & Calendar</button><button data-page="history">🕓 Church History</button><button data-page="leaders">✝ Deacon Board</button><button data-page="churchWorkers">🛠 Church Workers</button><button data-page="paidWorkers">💰 Paid Workers</button><button data-page="demographics">◉ Demographics</button><button data-page="birthdays">🎂 Birthdays</button><button data-page="deaths">✚ Death Records</button><button data-page="reports">▤ Reports</button><button data-page="backup">💾 Backup & Restore</button><button data-page="settings">⚙ Church Settings</button>
+</div><button class="btn danger" style="width:100%;margin-top:10px" onclick="logout()">Log out</button><div class="sideFoot">MEMBERSHIP SYSTEM · OFFLINE<br><span style="font-size:9px;opacity:.75">Developed by Hegin Haokip · 9612338375</span></div></aside>
+<main class="main"><header class="top"><div><b id="pageTitle">Dashboard</b><div style="font-size:11px;color:var(--muted)">Church Membership & Records</div></div><span id="today"></span></header><div class="content">
+<div id="defaultCredBanner" class="card" style="display:none;margin-bottom:14px;border-left:4px solid #c0392b;background:#fdf1f0"><b>⚠ You're still using the default login (admin / admin123).</b> Anyone with access to this computer can sign in. Please set a unique username and password. <button class="btn light" style="margin-left:8px" onclick="go('settings')">Change now</button></div>
+
+<section id="dashboard" class="page active">
+<div class="hero"><div class="heroBrand"><img id="dashLogo" alt="Church logo"><div><div class="eyebrow">CHURCH MANAGEMENT SYSTEM</div><h2 id="dashName"></h2><p id="dashLoc"></p></div></div><div class="heroRight"><div class="heroDate"><span id="dashDay"></span><b id="dashDate"></b></div><button class="btn gold" onclick="openMember()">＋ Add Member</button></div></div>
+<div class="grid stats5">
+<div class="stat tint1" onclick="go('members')"><div class="icon">👥</div><div><div class="label">Active Members</div><div class="num" id="sMembers">0</div><small id="sMembersSub">Current membership</small></div></div>
+<div class="stat tint2" onclick="go('families')"><div class="icon">⌂</div><div><div class="label">Families</div><div class="num" id="sFamilies">0</div><small>Households</small></div></div>
+<div class="stat tint3" onclick="go('members')"><div class="icon">💧</div><div><div class="label">Baptised</div><div class="num" id="sBaptised">0</div><small id="sBaptisedSub">Members baptised</small></div></div>
+<div class="stat tint4" onclick="go('departments')"><div class="icon">✦</div><div><div class="label">Departments</div><div class="num" id="sDepts">0</div><small>Ministries &amp; fellowships</small></div></div>
+<div class="stat tint5" onclick="go('events')"><div class="icon">📅</div><div><div class="label">Upcoming Events</div><div class="num" id="sEvents">0</div><small id="sEventsSub">On the calendar</small></div></div>
+</div>
+<div class="grid dashrow" style="margin-top:16px">
+<div class="card"><div class="cardtitle"><div><h3>Gender</h3><small>Active members</small></div></div><div id="chGender"></div></div>
+<div class="card"><div class="cardtitle"><div><h3>Age Groups</h3><small>Members with a date of birth</small></div></div><div id="chAges"></div></div>
+<div class="card"><div class="cardtitle"><div><h3>Quick Actions</h3><small>Frequently used tools</small></div></div><div class="quick qa"><button onclick="openMember()">＋ <b>Add Member</b><small>Create a complete profile</small></button><button onclick="newFamily()">⌂ <b>New Family</b><small>Start a household</small></button><button onclick="printCards()">🪪 <b>Print ID Cards</b><small>Photo cards</small></button><button onclick="go('backup')">💾 <b>Backup Data</b><small>Protect church records</small></button></div></div>
+</div>
+<div class="card" style="margin-top:16px"><div class="cardtitle"><div><h3>This Month at a Glance</h3><small id="glanceMonth"></small></div></div>
+<div class="glance"><div class="gcol"><h4>🎂 Birthdays</h4><div id="gBirthdays"></div></div><div class="gcol"><h4>💍 Wedding Anniversaries</h4><div id="gAnniv"></div></div><div class="gcol"><h4>🙌 New Members</h4><div id="gNew"></div></div><div class="gcol"><h4>⇄ Transfers</h4><div id="gTransfers"></div></div></div></div>
+<div class="card" style="margin-top:16px"><div class="cardtitle"><div><h3>Needs Attention</h3><small>Records with missing details — click to open the Members list</small></div></div><div id="attention" class="attn"></div></div>
+</section>
+
+<section id="members" class="page"><div class="toolbar"><div><h2>Members</h2><small><span id="memberCount">0</span> total</small></div><div class="right"><div class="search"><input id="search" placeholder="Search name, ID, phone, family..." oninput="onSearchInput()"></div><button class="btn light" onclick="exportCSV()">Export CSV</button><button class="btn primary" onclick="openMember()">＋ Add Member</button></div></div><div class="card tablewrap"><table class="table"><thead><tr><th>Photo</th><th>Member ID</th><th>Name</th><th>Gender</th><th>DOB</th><th>Phone</th><th>Family</th><th>Status</th><th>Docs</th><th>Actions</th></tr></thead><tbody id="memberRows"></tbody></table><div id="memberPager" style="display:flex;align-items:center;justify-content:space-between;padding:12px 2px 2px;font-size:12px;color:var(--muted)"></div></div></section>
+
+<section id="families" class="page"><div class="toolbar"><div><h2>Families</h2><small><span id="familyCount">0</span> family groups</small></div><div class="right"><div class="search"><input id="familySearch" placeholder="Search family name..." oninput="onFamilySearchInput()"></div><button class="btn primary" onclick="newFamily()">＋ New Family</button></div></div><div id="familyCards" class="grid families"></div></section>
+
+<section id="departments" class="page"><div class="toolbar"><div><h2>Departments</h2><small><span id="deptCount">0</span> departments</small></div><div class="right"><div class="search"><input id="deptSearch" placeholder="Search departments..." oninput="renderDepartments()"></div><button class="btn primary" onclick="newDepartment()">＋ New Department</button></div></div><div id="deptCards" class="grid families"></div></section>
+
+<div id="departmentModal" class="modal" role="dialog" aria-modal="true"><div class="modalbox">
+  <h2 id="deptModalTitle">Department</h2>
+  <div class="formgrid">
+    <div class="field"><label for="deptName">Full Name</label><input id="deptName" placeholder="e.g. Baptist Men's Fellowship"></div>
+    <div class="field"><label for="deptCode">Code</label><input id="deptCode" placeholder="e.g. CMF"></div>
+    <div class="field span2"><label for="deptDesc">Description</label><textarea id="deptDesc" rows="2" placeholder="Meeting day, purpose, notes..."></textarea></div>
+  </div>
+  <div class="actions" style="justify-content:space-between">
+    <button type="button" class="btn danger" id="deptDeleteBtn" onclick="deleteDepartment()" style="display:none">Delete Department</button>
+    <div class="actions" style="margin:0"><button type="button" class="btn primary" onclick="saveDepartmentDetails()">Save Details</button><button type="button" class="btn light" onclick="printDepartment()">🖶 Print Roster</button></div>
+  </div>
+  <hr style="margin:16px 0;border:none;border-top:1px solid #eee">
+  <div class="field"><label for="deptAddMember">Add Existing Member</label><div style="display:flex;gap:8px"><select id="deptAddMember" style="flex:1"><option value="">Select a member…</option></select><button type="button" class="btn accent" onclick="addMemberToDept()">＋ Add</button></div></div>
+  <div class="tablewrap"><table class="table"><thead><tr><th>Photo</th><th>Name</th><th>Phone</th><th>Status</th><th>Actions</th></tr></thead><tbody id="deptMemberRows"></tbody></table></div>
+  <div class="actions" style="justify-content:flex-end"><button type="button" class="btn light" onclick="closeModal('departmentModal')">Close</button></div>
+</div></div>
+
+<section id="events" class="page">
+  <div class="toolbar"><div><h2>Events & Calendar</h2><small><span id="eventCount">0</span> upcoming</small></div><div class="right"><button class="btn primary" onclick="newEvent()">＋ New Event</button></div></div>
+  <div class="two" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <button type="button" class="btn light" onclick="calShiftMonth(-1)">‹ Prev</button>
+        <h3 id="calMonthLabel" style="margin:0"></h3>
+        <button type="button" class="btn light" onclick="calShiftMonth(1)">Next ›</button>
+      </div>
+      <div id="calGrid" class="calendar"></div>
+    </div>
+    <div class="card">
+      <h3 id="eventListTitle">All Upcoming Events</h3>
+      <div id="eventList"></div>
+    </div>
+  </div>
+</section>
+
+<div id="eventModal" class="modal" role="dialog" aria-modal="true"><div class="modalbox">
+  <h2 id="eventModalTitle">Event</h2>
+  <div class="formgrid">
+    <div class="field span2"><label for="evTitle">Event Title</label><input id="evTitle" placeholder="e.g. Sunday Worship Service"></div>
+    <div class="field"><label for="evDate">Date</label><input id="evDate" type="date"></div>
+    <div class="field"><label for="evTime">Time</label><input id="evTime" type="time"></div>
+    <div class="field"><label for="evLocation">Location</label><input id="evLocation" placeholder="e.g. Main Sanctuary"></div>
+    <div class="field"><label for="evOrganizer">Person In Charge</label><input id="evOrganizer" placeholder="Optional"></div>
+    <div class="field span2"><label for="evNotes">Notes</label><textarea id="evNotes" rows="2"></textarea></div>
+  </div>
+  <div class="actions" style="justify-content:space-between">
+    <button type="button" class="btn danger" id="eventDeleteBtn" onclick="deleteEvent()" style="display:none">Delete Event</button>
+    <div class="actions" style="margin:0"><button type="button" class="btn primary" onclick="saveEvent()">Save Event</button><button type="button" class="btn light" onclick="closeModal('eventModal')">Cancel</button></div>
+  </div>
+</div></div>
+
+<section id="history" class="page">
+  <div class="toolbar"><div><h2>Church History</h2><small><span id="historyCount">0</span> milestones</small></div><div class="right"><button class="btn light" onclick="printChurchHistory()">🖶 Print Timeline</button><button class="btn primary" onclick="newHistoryEntry()">＋ Add Milestone</button></div></div>
+  <div class="card"><div id="historyTimeline" class="timeline"></div></div>
+</section>
+
+<div id="historyModal" class="modal" role="dialog" aria-modal="true"><div class="modalbox">
+  <h2 id="historyModalTitle">Church History Milestone</h2>
+  <div class="formgrid">
+    <div class="field"><label for="hDate">Date</label><input id="hDate" type="date"></div>
+    <div class="field span2"><label for="hTitle">Title</label><input id="hTitle" placeholder="e.g. Church Founded, New Building Dedicated..."></div>
+    <div class="field span2"><label for="hDesc">Description</label><textarea id="hDesc" rows="4" placeholder="Details about this milestone..."></textarea></div>
+  </div>
+  <div class="actions" style="justify-content:space-between">
+    <button type="button" class="btn danger" id="historyDeleteBtn" onclick="deleteHistoryEntry()" style="display:none">Delete</button>
+    <div class="actions" style="margin:0"><button type="button" class="btn primary" onclick="saveHistoryEntry()">Save</button><button type="button" class="btn light" onclick="closeModal('historyModal')">Cancel</button></div>
+  </div>
+</div></div>
+
+
+<section id="leaders" class="page"><div class="toolbar"><div><h2>Deacon Board</h2><small><span id="leaderCount">0</span> total</small></div><div class="right"><div class="search"><input id="leaderSearch" placeholder="Search name, ID, phone..." oninput="onRosterSearchInput('leaders')"></div><button class="btn light" onclick="printRoster('leaders')">🖶 Print Directory</button><button class="btn primary" onclick="openRosterEntry('leaders')">＋ Add to Board</button></div></div><div class="card tablewrap"><table class="table"><thead><tr><th>Photo</th><th>ID</th><th>Name</th><th>Category</th><th>Position</th><th>Phone</th><th>Status</th><th>Actions</th></tr></thead><tbody id="leaderRows"></tbody></table></div></section>
+
+<section id="churchWorkers" class="page"><div class="toolbar"><div><h2>Church Workers</h2><small><span id="churchWorkerCount">0</span> total</small></div><div class="right"><div class="search"><input id="churchWorkerSearch" placeholder="Search name, ID, phone..." oninput="onRosterSearchInput('churchWorkers')"></div><button class="btn light" onclick="printRoster('churchWorkers')">🖶 Print Directory</button><button class="btn primary" onclick="openRosterEntry('churchWorkers')">＋ Add Church Worker</button></div></div><div class="card tablewrap"><table class="table"><thead><tr><th>Photo</th><th>ID</th><th>Name</th><th>Position</th><th>Phone</th><th>Status</th><th>Actions</th></tr></thead><tbody id="churchWorkerRows"></tbody></table></div></section>
+
+<section id="paidWorkers" class="page"><div class="toolbar"><div><h2>Paid Workers</h2><small><span id="paidWorkerCount">0</span> total</small></div><div class="right"><div class="search"><input id="paidWorkerSearch" placeholder="Search name, ID, phone..." oninput="onRosterSearchInput('paidWorkers')"></div><button class="btn light" onclick="printRoster('paidWorkers')">🖶 Print Directory</button><button class="btn primary" onclick="openRosterEntry('paidWorkers')">＋ Add Paid Worker</button></div></div><div class="card tablewrap"><table class="table"><thead><tr><th>Photo</th><th>ID</th><th>Name</th><th>Position</th><th>Phone</th><th>Status</th><th>Actions</th></tr></thead><tbody id="paidWorkerRows"></tbody></table></div></section>
+
+<section id="demographics" class="page"><h2>Demographics</h2>
+<div class="card" style="margin-bottom:16px"><h3>Vital Statistics — <span id="demoYear"></span></h3><div class="grid stats">
+  <div class="stat"><div class="icon">👶</div><div><div class="label">Births</div><div class="num" id="sBirths">0</div><small>Members born this year</small></div></div>
+  <div class="stat"><div class="icon">✚</div><div><div class="label">Deaths</div><div class="num" id="sDeathsYear">0</div><small>Recorded this year</small></div></div>
+  <div class="stat"><div class="icon">→</div><div><div class="label">Transferred In</div><div class="num" id="sTransferIn">0</div><small>From other churches</small></div></div>
+  <div class="stat"><div class="icon">←</div><div><div class="label">Transferred Out</div><div class="num" id="sTransferOut">0</div><small>To other churches</small></div></div>
+</div></div>
+<div class="grid three"><div class="card"><h3>Gender</h3><div id="gender"></div></div><div class="card"><h3>Age Groups</h3><div id="ages"></div></div><div class="card"><h3>Marital Status</h3><div id="marital"></div></div><div class="card"><h3>Baptism</h3><div id="baptism"></div></div><div class="card"><h3>Status</h3><div id="statuses"></div></div></div><div class="card" style="margin-top:16px"><h3>Locations</h3><div id="locations"></div></div></section>
+
+<section id="birthdays" class="page"><div class="toolbar"><div><h2>Birthday Calendar</h2><small id="month"></small></div><div class="right"><button class="btn light" onclick="moveMonth(-1)">‹ Prev</button><button class="btn light" onclick="moveMonth(0,true)">Today</button><button class="btn light" onclick="moveMonth(1)">Next ›</button></div></div><div id="calendar" class="calendar"></div>
+<div class="card tablewrap" style="margin-top:16px"><div class="cardtitle"><div><h3>Birthday List</h3><small>Click a column heading to sort</small></div></div><table class="table"><thead><tr>
+<th style="cursor:pointer" onclick="sortBirthdays('name')">Name<span id="sortArrow-name"></span></th>
+<th>Family</th><th>Phone</th>
+<th style="cursor:pointer" onclick="sortBirthdays('dob')">Date of Birth<span id="sortArrow-dob"></span></th>
+</tr></thead><tbody id="birthdayRows"></tbody></table></div></section>
+
+<section id="deaths" class="page"><div class="toolbar"><div><h2>Death Records</h2><small>Permanent memorial records</small></div><button class="btn primary" onclick="openDeath()">＋ Add Death Record</button></div><div class="card tablewrap"><table class="table"><thead><tr><th>Member</th><th>DOB</th><th>Date of Death</th><th>Place</th><th>Notes</th><th>Docs</th><th>Actions</th></tr></thead><tbody id="deathRows"></tbody></table></div></section>
+
+<section id="reports" class="page"><h2>Printable Reports</h2>
+<div class="card rptperiod" style="margin-bottom:16px"><h3>Report Period</h3><p>Applies to the New Members, Death Register, and Transfer reports below. Leave blank to include all records.</p>
+  <div class="formgrid"><div class="field"><label for="rptFrom">From</label><input id="rptFrom" type="date"></div><div class="field"><label for="rptTo">To</label><input id="rptTo" type="date"></div></div>
+</div>
+
+<div class="report-section-title cat-member">📋 Membership Reports <span class="tag">Members</span></div>
+<div class="grid three">
+<div class="card rcard cat-member"><h3>Member Register</h3><p>Full membership listing.</p><button class="btn primary" onclick="printReport('members')">Print</button></div>
+<div class="card rcard cat-member"><h3>New Members Report</h3><p>Members who joined within the Report Period above.</p><button class="btn primary" onclick="printReport('newMembers')">Print</button></div>
+<div class="card rcard cat-member"><h3>Transfer In / Out Report</h3><p>Members transferred in or out within the Report Period above.</p><button class="btn primary" onclick="printReport('transfers')">Print</button></div>
+<div class="card rcard cat-member"><h3>Birthday Report</h3><p>Birthdays by month, sortable on-screen.</p><button class="btn primary" onclick="printReport('birthdays')">Print</button></div>
+<div class="card rcard cat-member"><h3>Death Register</h3><p>Recorded deaths, filterable by the Report Period above.</p><button class="btn primary" onclick="printReport('deaths')">Print</button></div>
+<div class="card rcard cat-member"><h3>Demographic Summary</h3><p>Membership statistics, including Vital Statistics for the year.</p><button class="btn primary" onclick="printReport('demo')">Print</button></div>
+</div>
+
+<div class="report-section-title cat-idcard">🪪 ID Cards <span class="tag">Photo Cards</span></div>
+<div class="grid three">
+<div class="card rcard cat-idcard"><h3>Member ID Cards</h3><p>Cards with passport photos.</p><button class="btn accent" onclick="printCards()">Print Cards</button></div>
+<div class="card rcard cat-idcard"><h3>Deacon Board ID Cards</h3><p>Same card size as Member ID Cards.</p><button class="btn accent" onclick="printRosterCards('leaders')">Print Cards</button></div>
+<div class="card rcard cat-idcard"><h3>Church Workers ID Cards</h3><p>Same card size as Member ID Cards.</p><button class="btn accent" onclick="printRosterCards('churchWorkers')">Print Cards</button></div>
+<div class="card rcard cat-idcard"><h3>Paid Workers ID Cards</h3><p>Same card size as Member ID Cards.</p><button class="btn accent" onclick="printRosterCards('paidWorkers')">Print Cards</button></div>
+</div>
+
+<div class="report-section-title cat-roster">👥 Roster Directories <span class="tag">Boards & Workers</span></div>
+<div class="grid three">
+<div class="card rcard cat-roster"><h3>Deacon Board</h3><p>Board directory listing.</p><button class="btn gold" onclick="printRoster('leaders')">Print</button></div>
+<div class="card rcard cat-roster"><h3>Church Workers Directory</h3><p>Church workers listing.</p><button class="btn gold" onclick="printRoster('churchWorkers')">Print</button></div>
+<div class="card rcard cat-roster"><h3>Paid Workers Directory</h3><p>Paid workers listing.</p><button class="btn gold" onclick="printRoster('paidWorkers')">Print</button></div>
+</div>
+</section>
+
+<section id="backup" class="page"><h2>Data Backup & Restore</h2><div class="backup"><div class="card backupbox"><div class="backupicon">💾</div><h3>Download Full Backup</h3><p>Includes members, photos, uploaded documents, death records and church settings.</p><button class="btn primary" onclick="backup()">Download Backup</button></div><div class="card backupbox"><div class="backupicon">↥</div><h3>Restore Backup</h3><p>Restore a previously saved JSON backup.</p><input id="restore" type="file" accept=".json" onchange="restoreBackup(event)"></div></div><div class="card" style="margin-top:16px"><h3>Backup Status</h3><div id="backupInfo"></div></div></section>
+
+<section id="settings" class="page"><h2>Church Settings</h2><div class="card"><div class="formgrid"><div class="field"><label for="setName">Church Name</label><input id="setName"></div><div class="field span2"><label for="setMotto">Motto / Tagline</label><input id="setMotto" style="font-style:italic" placeholder="e.g. With Distinctive Baptist Principle"></div><div class="field"><label for="setLoc">Location</label><input id="setLoc"></div><div class="field"><label for="setReg">Registration No.</label><input id="setReg" placeholder="e.g. REG/MN/2004/118"></div><div class="field"><label for="setEst">Year of Establishment</label><input id="setEst" type="number" min="1800" max="2100" placeholder="e.g. 1978"></div><div class="field"><label for="setEmail">Church Email</label><input id="setEmail" type="email" placeholder="office@church.org"></div><div class="field"><label for="setPhone">Mobile Phone No.</label><input id="setPhone" type="tel" placeholder="+91 XXXXX XXXXX"></div><div class="field"><label for="setP">Primary Colour</label><input id="setP" type="color"></div><div class="field"><label for="setA">Accent Colour</label><input id="setA" type="color"></div><div class="field span2"><label for="logoFile">Church Logo</label><input id="logoFile" type="file" accept="image/*" onchange="changeLogo(event)"></div></div><button class="btn primary" onclick="saveSettings()">Save Settings</button><button class="btn light" onclick="resetData()">Reset Demo Data</button></div>
+
+<div class="card" style="margin-top:16px"><h3>Login & Security</h3><p style="color:var(--muted);font-size:12px;margin-top:-6px">Your password is never stored in plain text — only a one-way cryptographic hash is saved.</p><div class="formgrid"><div class="field"><label for="curPass">Current Password</label><input id="curPass" type="password" autocomplete="current-password"></div><div class="field"><label for="newUser">Username</label><input id="newUser" autocomplete="username"></div><div class="field"><label for="newPass">New Password</label><input id="newPass" type="password" autocomplete="new-password" placeholder="Leave blank to keep current"></div><div class="field"><label for="confirmPass">Confirm New Password</label><input id="confirmPass" type="password" autocomplete="new-password"></div></div><button class="btn primary" onclick="changeCredentials()">Update Login Credentials</button></div>
+
+<div class="card" style="margin-top:16px"><h3>Security Note</h3><p>This offline version stores data locally in the browser (IndexedDB). Login uses a hashed password, but this remains a client-side app — anyone with access to this device's browser storage or developer tools could potentially bypass it. Use Backup & Restore regularly, and keep the exported JSON file somewhere safe. For multi-computer production use, a secure server/database with roles, audit logs and encrypted backups is recommended.</p></div></section>
+
+</div></main></div>
+
+<div id="memberModal" class="modal" role="dialog" aria-modal="true"><div class="modalbox"><h2 id="memberTitle">Add Member</h2><div id="mTimeline" class="timeline"></div><form id="memberForm" onsubmit="saveMember(event)"><input type="hidden" id="mUid"><div class="formgrid">
+<div class="field"><label for="mId">Member ID *</label><input id="mId" required><div class="errmsg">This Member ID is already in use.</div></div>
+<div class="field"><label for="mName">Full Name *</label><input id="mName" required></div>
+<div class="field"><label for="mPhoto">Passport Photo</label><input id="mPhoto" type="file" accept="image/jpeg,image/png,image/webp" onchange="previewPhoto(event)"><div id="photoPreview"></div></div>
+<div class="field"><label for="mGender">Gender</label><select id="mGender"><option>Female</option><option>Male</option><option>Other</option></select></div><div class="field"><label for="mDob">Date of Birth</label><input id="mDob" type="date"></div><div class="field"><label for="mPhone">Phone</label><input id="mPhone"></div><div class="field"><label for="mEmail">Email</label><input id="mEmail" type="email"></div><div class="field"><label for="mFamily">Family</label><input id="mFamily"></div><div class="field"><label for="mFatherName">Father's Name</label><input id="mFatherName"></div><div class="field"><label for="mMotherName">Mother's Name</label><input id="mMotherName"></div><div class="field"><label for="mCertNo">Birth Certificate No.</label><input id="mCertNo" placeholder="e.g. 319"></div><div class="field"><label for="mMarital">Marital Status</label><select id="mMarital"><option>Single</option><option>Married</option><option>Widowed</option><option>Widower</option><option>Divorced</option></select></div><div class="field"><label for="mBaptism">Baptism Date</label><input id="mBaptism" type="date"></div><div class="field"><label for="mBaptismMinister">Baptism Minister</label><input id="mBaptismMinister"></div><div class="field"><label for="mDedication">Dedication Date</label><input id="mDedication" type="date"></div><div class="field"><label for="mDedicationMinister">Dedication Minister</label><input id="mDedicationMinister"></div><div class="field"><label for="mMarriageDate">Marriage Date</label><input id="mMarriageDate" type="date"></div><div class="field"><label for="mMarriageMinister">Marriage Minister</label><input id="mMarriageMinister"></div><div class="field"><label for="mMarriageType">Marriage Type</label><select id="mMarriageType"><option value=""></option><option>Holy Marriage</option><option>Re-affirmed/simple marriage</option><option>Love Marriage</option><option>Court Marriage</option><option>Others</option></select></div><div class="field"><label for="mMarriagePlace">Marriage Place</label><input id="mMarriagePlace" placeholder="e.g. Gorkha Baptist Church"></div><div class="field"><label for="mJoin">Membership Date</label><input id="mJoin" type="date"></div><div class="field"><label for="mOccupation">Occupation</label><input id="mOccupation"></div><div class="field"><label for="mEducation">Education</label><input id="mEducation"></div><div class="field"><label for="mNextKin">Next of Kin</label><input id="mNextKin"></div><div class="field"><label for="mKinRelation">Relationship</label><input id="mKinRelation"></div><div class="field"><label for="mLocation">Village / Town</label><input id="mLocation"></div><div class="field span2"><label for="mAddress">Home Address</label><input id="mAddress" placeholder="e.g. House no., Locality, District, State 795002"></div><div class="field"><label for="mStatus">Status</label><select id="mStatus"><option>Active Member</option><option>Associate Member</option><option>Minor Member</option><option>Inactive</option><option>Transferred</option></select></div>
+<div class="field"><label for="mTransferDirection">Transfer Direction</label><select id="mTransferDirection"><option value="">Not Applicable</option><option>Transferred From Church</option><option>Transferred To Church</option></select></div>
+<div class="field"><label for="mTransferDate">Transfer Date</label><input id="mTransferDate" type="date"></div>
+<div class="field"><label for="mTransferChurch">Church Name</label><input id="mTransferChurch" placeholder="Name of church"></div>
+<div class="field"><label for="mTransferStatus">Transfer Status</label><select id="mTransferStatus"><option value="">Not Applicable</option><option>Pending</option><option>Completed</option><option>Cancelled</option></select></div>
+<div class="field span2"><label for="mTransferReason">Reason for Transfer</label><textarea id="mTransferReason" rows="2"></textarea></div>
+<div class="field span2"><label for="mNotes">Address / Notes</label><textarea id="mNotes" rows="5" style="white-space:pre-wrap"></textarea></div>
+<div class="field span2"><label for="mDocs">Member Documents</label><input id="mDocs" type="file" multiple accept=".pdf,.jpg,.jpeg,.png,.webp,.doc,.docx"><div id="mDocList"></div></div>
+</div><div class="actions"><button type="button" class="btn light" onclick="closeModal('memberModal')">Cancel</button><button type="button" id="mPrintBtn" class="btn light" style="display:none" onclick="printMember($('mUid').value)">🖶 Print Profile</button><button type="button" id="mCertBtn" class="btn light" style="display:none" onclick="printBirthCertificate($('mUid').value)">📜 Birth Certificate</button><button id="mSaveBtn" class="btn primary">Save Member</button></div></form></div></div>
+
+<div id="deathModal" class="modal" role="dialog" aria-modal="true"><div class="modalbox"><h2>Death Record</h2><form onsubmit="saveDeath(event)"><input type="hidden" id="dUid"><div class="formgrid"><div class="field span2"><label for="dMember">Member *</label><select id="dMember" required></select></div><div class="field"><label for="dDate">Date of Death *</label><input id="dDate" type="date" required></div><div class="field"><label for="dPlace">Place of Death</label><input id="dPlace"></div><div class="field span2"><label for="dNotes">Cause / Notes</label><textarea id="dNotes" rows="3"></textarea></div><div class="field span2"><label for="dDocs">Death Documents</label><input id="dDocs" type="file" multiple accept=".pdf,.jpg,.jpeg,.png,.webp,.doc,.docx"><div id="dDocList"></div></div></div><div class="actions"><button type="button" class="btn light" onclick="closeModal('deathModal')">Cancel</button><button class="btn primary">Save Record</button></div></form></div></div>
+
+<div id="familyModal" class="modal" role="dialog" aria-modal="true"><div class="modalbox"><h2 id="familyTitle">Family</h2><div class="field" style="max-width:260px;margin-bottom:14px"><label for="familyIdInput">Family ID</label><div style="display:flex;gap:8px"><input id="familyIdInput" placeholder="e.g. FAM-001" style="flex:1"><button type="button" class="btn light" onclick="saveFamilyId()">Save</button></div><div class="errmsg" id="familyIdErr">This Family ID is already in use.</div></div><div class="tablewrap"><table class="table"><thead><tr><th>Photo</th><th>Name</th><th>Gender</th><th>DOB</th><th>Phone</th><th>Status</th><th>Actions</th></tr></thead><tbody id="familyMemberRows"></tbody></table></div><div class="actions" style="justify-content:space-between"><button type="button" class="btn primary" onclick="printFamily(currentFamily)">🖶 Print Family Record</button><div class="actions" style="margin:0"><button type="button" class="btn accent" onclick="addMemberToFamily(currentFamily)">＋ Add Member</button><button type="button" class="btn light" onclick="closeModal('familyModal')">Close</button></div></div></div></div>
+
+<div id="rosterModal" class="modal" role="dialog" aria-modal="true"><div class="modalbox"><h2 id="rosterTitle">Add Entry</h2><form id="rosterForm" onsubmit="saveRosterEntry(event)"><input type="hidden" id="rUid"><input type="hidden" id="rType"><div class="formgrid">
+<div class="field"><label for="rId">ID *</label><input id="rId" required><div class="errmsg">This ID is already in use.</div></div>
+<div class="field"><label for="rName">Full Name *</label><input id="rName" required></div>
+<div class="field"><label for="rPhoto">Photo</label><input id="rPhoto" type="file" accept="image/jpeg,image/png,image/webp" onchange="previewRosterPhoto(event)"><div id="rPhotoPreview"></div></div>
+<div class="field" id="rCategoryField"><label for="rCategory">Category</label><select id="rCategory"></select></div>
+<div class="field"><label for="rRole">Position / Role</label><input id="rRole" placeholder="e.g. Senior Pastor, Head Deacon, Choir Leader"></div>
+<div class="field"><label for="rPhone">Phone</label><input id="rPhone"></div>
+<div class="field"><label for="rEmail">Email</label><input id="rEmail" type="email"></div>
+<div class="field"><label for="rJoinDate">Date Appointed / Joined</label><input id="rJoinDate" type="date"></div>
+<div class="field"><label for="rStatus">Status</label><select id="rStatus"><option>Active</option><option>Inactive</option></select></div>
+<div class="field span2"><label for="rNotes">Notes</label><textarea id="rNotes" rows="3"></textarea></div>
+</div><div class="actions"><button type="button" class="btn light" onclick="closeModal('rosterModal')">Cancel</button><button type="button" id="rPrintBtn" class="btn light" style="display:none" onclick="printRosterMember($('rType').value,$('rUid').value)">🖶 Print Profile</button><button class="btn primary">Save Entry</button></div></form></div></div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ============================================================
+   Gorkha Baptist Church — Membership Management System
+   Desktop app. When running in Electron, records are persisted in
+   SQLite and photos/documents are written to disk as plain files,
+   referenced from the record by a short path string — nothing
+   binary ever sits in the JSON that gets shipped over IPC, so
+   ordinary edits stay cheap even with thousands of records.
+   Every add/edit/delete of a single member, family, roster entry
+   or death record is saved individually (not by re-sending the
+   whole dataset).
+   Falls back to IndexedDB (not localStorage — localStorage's
+   ~5-10MB quota is far too small for photos/documents) when not
+   running inside Electron, storing the dataset as one JSON blob
+   with base64 photos/documents embedded as before.
+   ============================================================ */
+
+const $ = id => document.getElementById(id);
+const MAX_PHOTO_BYTES = 5 * 1024 * 1024;
+const MAX_DOC_BYTES = 10 * 1024 * 1024;
+const PHOTO_MAX_DIM = 900;      // longest edge, px — plenty for on-screen thumbnails and printed ID cards
+const PHOTO_QUALITY = 0.82;     // JPEG quality after resize
+
+const DEFAULT_SETTINGS = { name: "Gorkha Baptist Church", motto: "", location: "", logo: "", primary: "#173b57", accent: "#2c8c8c", registrationNo: "", established: "", email: "", phone: "" };
+function emptyData(){ return { members: [], deaths: [], families: [], leaders: [], churchWorkers: [], paidWorkers: [], departments: [], churchEvents: [], churchHistory: [], settings: { ...DEFAULT_SETTINGS }, auth: null }; }
+function isElectron(){ return !!(window.churchAPI && window.churchAPI.loadData); }
+function withTimeout(promise, ms, label){      // a hung IPC call (disk stuck, main process busy) used to leave the renderer's await stuck forever, which reads to the user as "the app is frozen" with no error, no toast, nothing to act on. Racing every main-process call against a timeout turns a silent hang into a visible, retryable error instead.
+  let t;
+  const timeout = new Promise((_, reject) => { t = setTimeout(() => reject(new Error((label || "This action") + " is taking too long and may be stuck. Please try again.")), ms); });
+  return Promise.race([promise, timeout]).finally(() => clearTimeout(t));
+}
+
+/* ---------- storage layer (Electron + SQLite, browser/IndexedDB fallback) ---------- */
+const STORE_KEY = "gbcData";
+const IDB_NAME = "gbcChurchDb", IDB_STORE = "kv";
+let idbPromise = null;
+function idb(){
+  if (idbPromise) return idbPromise;
+  idbPromise = new Promise((resolve, reject) => {
+    const req = indexedDB.open(IDB_NAME, 1);
+    req.onupgradeneeded = () => req.result.createObjectStore(IDB_STORE);
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
+  });
+  return idbPromise;
+}
+async function idbGet(key){
+  const db = await idb();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(IDB_STORE, "readonly").objectStore(IDB_STORE).get(key);
+    tx.onsuccess = () => resolve(tx.result);
+    tx.onerror = () => reject(tx.error);
+  });
+}
+async function idbSet(key, value){
+  const db = await idb();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(IDB_STORE, "readwrite").objectStore(IDB_STORE).put(value, key);
+    tx.onsuccess = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+}
+async function storeGet(key){
+  if (isElectron()) return await withTimeout(window.churchAPI.loadData(), 20000, "Loading your data");
+  const fromIdb = await idbGet(key);
+  if (fromIdb !== undefined) return fromIdb;
+  const legacyLs = localStorage.getItem(key);          // migrate anyone still on the old localStorage-only build
+  return legacyLs ? JSON.parse(legacyLs) : undefined;
+}
+async function storeSet(key, value){
+  if (isElectron()) { await withTimeout(window.churchAPI.saveData(value), 20000, "Saving"); return; }
+  await idbSet(key, value);
+}
+
+/* ---------- per-record persistence: Electron writes just the one changed row; browser fallback still
+   has to rewrite the whole IndexedDB blob (no per-record concept there), but that's a far larger quota
+   than localStorage and never touches base64 photos unless a browser-only user edits them. ---------- */
+async function saveOne(listName, row){
+  if (isElectron()){
+    try{ await withTimeout(window.churchAPI.saveRecord(listName, row), 15000, "Saving"); }
+    catch(e){ console.error(e); toast(/taking too long/.test(e.message) ? e.message : "Failed to save — check available storage space.", true); throw e; }
+    return;
+  }
+  await persist();
+}
+async function deleteOne(listName, uidToDelete){
+  if (isElectron()){
+    try{ await withTimeout(window.churchAPI.deleteRecord(listName, uidToDelete), 15000, "Deleting"); }
+    catch(e){ console.error(e); toast(/taking too long/.test(e.message) ? e.message : "Failed to delete — please try again.", true); throw e; }
+    return;
+  }
+  await persist();
+}
+async function saveSettingsPersist(){
+  if (isElectron()){
+    try{ await withTimeout(window.churchAPI.saveSettings(data.settings), 15000, "Saving settings"); }
+    catch(e){ console.error(e); toast(/taking too long/.test(e.message) ? e.message : "Failed to save settings.", true); throw e; }
+    return;
+  }
+  await persist();
+}
+async function saveAuthPersist(){
+  if (isElectron()){
+    try{ await withTimeout(window.churchAPI.saveAuth(data.auth), 15000, "Saving login credentials"); }
+    catch(e){ console.error(e); toast(/taking too long/.test(e.message) ? e.message : "Failed to save login credentials.", true); throw e; }
+    return;
+  }
+  await persist();
+}
+
+/* ---------- photo/document helpers ---------- */
+function photoUrl(ref){                          // Electron: ref is a disk-relative path served over church-file://; browser fallback: ref is still a data: URL
+  if (!ref) return "";
+  if (ref.startsWith("data:")) return ref;
+  return isElectron() ? "church-file://local/" + ref.split("/").map(encodeURIComponent).join("/") : ref;
+}
+function compressImage(file, maxDim, quality){    // resize + re-encode as JPEG client-side before it ever touches storage — a typical 3-5MB phone photo becomes ~100-200KB
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const reader = new FileReader();
+    reader.onerror = () => reject(reader.error);
+    reader.onload = () => {
+      img.onerror = () => reject(new Error("Could not read image"));
+      img.onload = () => {
+        let { width, height } = img;
+        if (width > maxDim || height > maxDim){
+          if (width >= height) { height = Math.round(height * maxDim / width); width = maxDim; }
+          else { width = Math.round(width * maxDim / height); height = maxDim; }
+        }
+        const canvas = document.createElement("canvas");
+        canvas.width = width; canvas.height = height;
+        canvas.getContext("2d").drawImage(img, 0, 0, width, height);
+        resolve(canvas.toDataURL("image/jpeg", quality));
+      };
+      img.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+function readAsDataURL(file){
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload = () => resolve(r.result);
+    r.onerror = () => reject(r.error);
+    r.readAsDataURL(file);
+  });
+}
+
+let data = emptyData();
+let cal = new Date();
+let pendingPhoto = "";
+let membersById = new Map();   // rebuilt on every render for O(1) edit/delete lookups
+let deathsById = new Map();
+let searchTimer = null;
+let familyGroups = [];         // rebuilt on every families render: [{name, members, famId}]
+let familySearchTimer = null;
+let currentFamily = "";        // family currently open in the family modal
+let calCursor = new Date();    // month currently shown on the events calendar
+const NO_FAMILY_LABEL = "(No Family Group)";
+
+function uid(){
+  return (crypto.randomUUID ? crypto.randomUUID() : "id-" + Date.now() + "-" + Math.random().toString(16).slice(2));
+}
+async function sha256Hex(str){                     // legacy scheme, kept only to verify pre-upgrade installs during migration
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
+}
+function bytesToHex(bytes){ return Array.from(bytes).map(b => b.toString(16).padStart(2, "0")).join(""); }
+function hexToBytes(hex){ const a = new Uint8Array(hex.length / 2); for (let i = 0; i < a.length; i++) a[i] = parseInt(hex.substr(i * 2, 2), 16); return a; }
+async function deriveHash(password, saltHex){       // salted, iterated (PBKDF2/SHA-256, 150k rounds) — resists a stolen-database guessing attack far better than a bare hash
+  const salt = saltHex ? hexToBytes(saltHex) : crypto.getRandomValues(new Uint8Array(16));
+  const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(password), "PBKDF2", false, ["deriveBits"]);
+  const bits = await crypto.subtle.deriveBits({ name: "PBKDF2", salt, iterations: 150000, hash: "SHA-256" }, key, 256);
+  return { hash: bytesToHex(new Uint8Array(bits)), salt: bytesToHex(salt) };
+}
+async function verifyPassword(password, auth){
+  if (!auth.salt){                                  // pre-upgrade install: verify against the old unsalted hash, flag for a silent upgrade
+    return { ok: (await sha256Hex(password)) === auth.passwordHash, needsUpgrade: true };
+  }
+  const { hash } = await deriveHash(password, auth.salt);
+  return { ok: hash === auth.passwordHash, needsUpgrade: false };
+}
+function esc(s){
+  return String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
+}
+function fmtD(dateStr){                // "YYYY-MM-DD" -> "DD-MM-YYYY" for on-screen/printed display. Storage, <input type="date"> values and sorting all stay ISO (yyyy-mm-dd) — only how a date is shown changes here.
+  if (!dateStr) return dateStr;
+  const mm = /^(\d{4})-(\d{2})-(\d{2})/.exec(dateStr);
+  return mm ? `${mm[3]}-${mm[2]}-${mm[1]}` : dateStr;
+}
+
+/* ---------- date inputs: DD-MM-YYYY text boxes that also accept 00-00-0000 ("no data available") ----------
+   Native <input type="date"> cannot hold a zero date, so every date box is swapped for a text box at startup.
+   Each box's .value is wrapped so the rest of the app still reads and writes ISO "YYYY-MM-DD" ("0000-00-00" for
+   an unknown date) — storage, sorting and printing are unchanged. Day or month may be 00 on their own
+   (e.g. 00-00-1985 when only the year is known). */
+const ZERO_DATE = "0000-00-00";
+function isoToDisp(v){
+  const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(v || "");
+  return m ? `${m[3]}-${m[2]}-${m[1]}` : (v || "");
+}
+function dispToIso(s){
+  s = (s || "").trim();
+  if (!s) return "";
+  const iso = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s);
+  if (iso) s = `${iso[3]}-${iso[2]}-${iso[1]}`;
+  const m = /^(\d{1,2})[-\/.](\d{1,2})[-\/.](\d{4})$/.exec(s);
+  if (!m) return null;                                   // null = typed something that is not a valid date
+  const d = +m[1], mo = +m[2], y = +m[3];
+  if (mo > 12 || d > 31) return null;
+  if (d && mo){ const t = new Date(y, mo - 1, d); if (t.getFullYear() !== y || t.getMonth() !== mo - 1 || t.getDate() !== d) return null; }
+  return `${String(y).padStart(4, "0")}-${String(mo).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+}
+function usableDate(s){                                  // a real calendar date (not blank, not a zero/partial date)
+  const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(s || "");
+  if (!m || +m[1] === 0 || +m[2] === 0 || +m[3] === 0) return false;
+  return !isNaN(new Date(s));
+}
+function yearOf(s){ const m = /^(\d{4})/.exec(s || ""); return m && +m[1] ? +m[1] : null; }
+function initDateInputs(){
+  const nativeValue = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value");
+  document.querySelectorAll('input[type="date"]').forEach(el => {
+    el.type = "text";
+    el.placeholder = "DD-MM-YYYY";
+    el.maxLength = 10;
+    el.setAttribute("inputmode", "numeric");
+    el.setAttribute("autocomplete", "off");
+    el.title = "Format DD-MM-YYYY. Type 00-00-0000 if the date is not available.";
+    Object.defineProperty(el, "value", {
+      configurable: true,
+      get(){ const r = dispToIso(nativeValue.get.call(el)); return r === null ? "" : r; },
+      set(v){ nativeValue.set.call(el, isoToDisp(v)); el.classList.remove("badDate"); }
+    });
+    el.addEventListener("input", () => {
+      let raw = nativeValue.get.call(el);
+      if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) raw = isoToDisp(raw);           // pasted ISO date
+      if (el.selectionStart !== raw.length && raw === nativeValue.get.call(el)) return;   // editing mid-text: leave it alone
+      const digits = raw.replace(/\D/g, "").slice(0, 8);
+      const out = digits.length > 4 ? `${digits.slice(0, 2)}-${digits.slice(2, 4)}-${digits.slice(4)}` : digits.length > 2 ? `${digits.slice(0, 2)}-${digits.slice(2)}` : digits;
+      nativeValue.set.call(el, out);
+      el.classList.remove("badDate");
+    });
+    el.addEventListener("blur", () => {
+      const raw = nativeValue.get.call(el).trim();
+      const bad = raw && dispToIso(raw) === null;
+      el.classList.toggle("badDate", !!bad);
+      if (bad) toast("Date must be DD-MM-YYYY (use 00-00-0000 if the date is not available).", true);
+    });
+  });
+}
+function toast(msg, isErr){
+  const t = $("toast");
+  t.textContent = msg;
+  t.className = "toast show" + (isErr ? " err" : "");
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => t.classList.remove("show"), 2600);
+}
+// Safety net: a JS error or a rejected promise that nobody is watching used to fail completely
+// silently — nothing in the console the user would ever see, no toast, the screen just stops
+// responding to the one thing that broke. These two surface it instead, so "it froze" turns into
+// a message that at least says something went wrong (and gives us an F12 console line to go on).
+window.addEventListener("error", e => { console.error("Unhandled error:", e.error || e.message); toast("Something went wrong. If the app seems stuck, press F12 for details, then reopen it.", true); });
+window.addEventListener("unhandledrejection", e => { console.error("Unhandled promise rejection:", e.reason); toast("Something went wrong. If the app seems stuck, press F12 for details, then reopen it.", true); });
+
+/* ---------- boot ---------- */
+async function boot(){
+  try{
+    const saved = await storeGet(STORE_KEY);                  // storeGet() itself migrates anyone still on the old localStorage-only build
+    if (saved) data = saved;
+    if (!data.members) data.members = [];
+    if (!data.deaths) data.deaths = [];
+    if (!data.families) data.families = [];
+    if (!data.leaders) data.leaders = [];
+    if (!data.churchWorkers) data.churchWorkers = [];
+    if (!data.paidWorkers) data.paidWorkers = [];
+    const seedDepartments = !data.departments;               // only true on first-ever run of this feature, never re-seeds after a deliberate deletion
+    if (!data.departments) data.departments = [];
+    if (!data.churchEvents) data.churchEvents = [];
+    if (!data.churchHistory) data.churchHistory = [];
+    if (seedDepartments){
+      data.departments = [
+        { _uid: uid(), id: "BMF", name: "Baptist Men's Fellowship", description: "", memberUids: [] },
+        { _uid: uid(), id: "BYF", name: "Baptist Youth Fellowship", description: "", memberUids: [] },
+        { _uid: uid(), id: "BWF", name: "Baptist Women's Fellowship", description: "", memberUids: [] }
+      ];
+    }
+    data.departments.forEach(x => { if (!x._uid) x._uid = uid(); if (!x.memberUids) x.memberUids = []; });
+    data.churchEvents.forEach(x => { if (!x._uid) x._uid = uid(); });
+    data.churchHistory.forEach(x => { if (!x._uid) x._uid = uid(); });
+    if (data.workers){                                        // one-time migration: old combined "workers" list → split by category into the two new modules
+      data.workers.forEach(x => { (x.category === "Paid Worker" ? data.paidWorkers : data.churchWorkers).push(x); });
+      delete data.workers;
+    }
+    // Merge over defaults rather than a truthiness check: the SQLite-backed Electron
+    // store returns settings as {} (not undefined) on a brand-new database, so a plain
+    // "if (!data.settings)" never fires and name/location/colors stay undefined forever
+    // (which then renders the literal text "undefined" in the UI and throws on print,
+    // e.g. data.settings.name.toUpperCase()). Merging fills in every missing key.
+    data.settings = { ...DEFAULT_SETTINGS, ...(data.settings || {}) };
+    data.members.forEach(m => { if (!m._uid) m._uid = uid(); });
+    data.deaths.forEach(d => { if (!d._uid) d._uid = uid(); });
+    data.leaders.forEach(x => { if (!x._uid) x._uid = uid(); });
+    data.churchWorkers.forEach(x => { if (!x._uid) x._uid = uid(); });
+    data.paidWorkers.forEach(x => { if (!x._uid) x._uid = uid(); });
+    data.members.forEach(m => { if (m.status === "Active") m.status = "Active Member"; });  // one-time migration: old plain "Active" status → "Active Member"
+
+    // back-fill a Family ID for every distinct family name already used by a member
+    const knownNames = new Set(data.families.map(f => f.name));
+    data.members.forEach(m => { const n = (m.family || "").trim(); if (n && !knownNames.has(n)) { knownNames.add(n); data.families.push({ _uid: uid(), famId: nextFamilyId(), name: n }); } });
+
+    if (!data.auth){                                          // first run: set up default credentials, salted+hashed (never store plain text)
+      const { hash, salt } = await deriveHash("admin123");
+      data.auth = { username: "admin", passwordHash: hash, salt, isDefault: true };
+    }
+    await persist();
+  }catch(e){
+    console.error(e);
+    toast("Could not load saved data — starting fresh.", true);
+  }
+  refresh();
+  $("loginBtn").disabled = false;
+  $("loginBtn").textContent = "Secure Login";
+  $("loginStatus").textContent = "";
+}
+async function persist(){
+  try{ await storeSet(STORE_KEY, data); }
+  catch(e){ console.error(e); toast("Failed to save — check available storage space.", true); }
+}
+
+async function login(){
+  const user = $("user").value.trim();
+  const pass = $("pass").value;
+  if (!user || user !== data.auth.username) return toast("Incorrect username or password.", true);
+  const result = await verifyPassword(pass, data.auth);
+  if (!result.ok) return toast("Incorrect username or password.", true);
+  if (result.needsUpgrade){                        // transparently migrate a pre-upgrade unsalted hash the moment we see the correct password
+    const { hash, salt } = await deriveHash(pass);
+    data.auth.passwordHash = hash; data.auth.salt = salt;
+    await saveAuthPersist();
+  }
+  $("login").style.display = "none";
+  $("app").style.display = "block";
+  $("pass").value = "";
+  initApp();
+}
+function logout(){ $("pass").value = ""; location.reload(); }
+
+function initApp(){
+  $("today").textContent = new Date().toLocaleDateString();
+  $("defaultCredBanner").style.display = data.auth && data.auth.isDefault ? "block" : "none";
+  $("setName").value = data.settings.name;
+  $("setMotto").value = data.settings.motto;
+  $("setLoc").value = data.settings.location;
+  $("setReg").value = data.settings.registrationNo;
+  $("setEst").value = data.settings.established;
+  $("setEmail").value = data.settings.email;
+  $("setPhone").value = data.settings.phone;
+  $("setP").value = data.settings.primary;
+  $("setA").value = data.settings.accent;
+  $("newUser").value = data.auth.username;
+  renderAll();
+}
+
+function logoFallback(){
+  return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160"><circle cx="80" cy="80" r="76" fill="${data.settings.primary}"/><path d="M80 30v100M45 65h70" stroke="white" stroke-width="12" stroke-linecap="round"/></svg>`
+  );
+}
+function refresh(){
+  const src = photoUrl(data.settings.logo) || logoFallback();
+  ["loginLogo", "sideLogo", "dashLogo"].forEach(id => $(id).src = src);
+  $("brandText").textContent = data.settings.name;
+  $("loginName").textContent = data.settings.name;
+  $("loginVerse").textContent = data.settings.motto;
+  $("dashName").textContent = data.settings.name;
+  $("dashLoc").textContent = data.settings.location;
+  document.documentElement.style.setProperty("--p", data.settings.primary);
+  document.documentElement.style.setProperty("--a", data.settings.accent);
+}
+
+/* ---------- navigation ---------- */
+function go(page){
+  document.querySelectorAll(".page").forEach(x => x.classList.remove("active"));
+  document.querySelectorAll(".nav button").forEach(x => x.classList.remove("active"));
+  $(page).classList.add("active");
+  document.querySelector(`[data-page="${page}"]`).classList.add("active");
+  const titles = { backup: "Backup & Restore", leaders: "Deacon Board", churchWorkers: "Church Workers", paidWorkers: "Paid Workers", events: "Events & Calendar", history: "Church History" };
+  $("pageTitle").textContent = titles[page] || (page[0].toUpperCase() + page.slice(1));
+}
+document.querySelectorAll(".nav button").forEach(b => b.onclick = () => go(b.dataset.page));
+
+function renderAll(){
+  renderMembers();
+  renderFamilies();
+  renderDepartments();
+  renderDeaths();
+  renderRoster("leaders");
+  renderRoster("churchWorkers");
+  renderRoster("paidWorkers");
+  renderCalendar();
+  renderEventList();
+  renderChurchHistory();
+  dashboard();
+  demo();
+  calendar();
+  renderBirthdayList();
+  backupInfo();
+}
+
+/* ---------- members ---------- */
+const MEMBER_PAGE_SIZE = 150;    // keeps each render to a bounded number of DOM rows no matter how large the congregation grows — a full-table rebuild on every keystroke is what makes typing feel "frozen" once a list runs into the thousands
+let memberPage = 1;
+function onSearchInput(){
+  clearTimeout(searchTimer);
+  memberPage = 1;               // a new search always starts back at page 1
+  searchTimer = setTimeout(renderMembers, 180);   // debounce so typing doesn't re-render on every keystroke
+}
+function renderMembers(){
+  const q = ($("search").value || "").trim().toLowerCase();
+  const filtered = q
+    ? data.members.filter(m => [m.id, m.name, m.phone, m.family, m.email, m.location].join(" ").toLowerCase().includes(q))
+    : data.members;
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / MEMBER_PAGE_SIZE));
+  if (memberPage > totalPages) memberPage = totalPages;
+  if (memberPage < 1) memberPage = 1;
+  const start = (memberPage - 1) * MEMBER_PAGE_SIZE;
+  const rows = filtered.slice(start, start + MEMBER_PAGE_SIZE);
+
+  membersById = new Map(data.members.map(m => [m._uid, m]));   // O(1) lookup for edit/delete, avoids re-scanning the array per row
+  $("memberCount").textContent = data.members.length;
+  $("memberRows").innerHTML = rows.map(m => `<tr>
+    <td>${m.photo ? `<img class="thumb" loading="lazy" decoding="async" src="${photoUrl(m.photo)}" alt="">` : "—"}</td>
+    <td>${esc(m.id)}</td>
+    <td><b>${esc(m.name)}</b></td>
+    <td>${esc(m.gender)}</td>
+    <td>${esc(fmtD(m.dob)) || "—"}</td>
+    <td>${esc(m.phone) || "—"}</td>
+    <td>${m.family ? `${esc(m.family)}<br><small style="color:var(--muted)">${esc(familyIdFor(m.family))}</small>` : "—"}</td>
+    <td><span class="pill">${esc(m.status)}</span></td>
+    <td>${(m.documents || []).length || "—"}</td>
+    <td><button class="btn light" data-action="edit" data-uid="${m._uid}">Edit</button> <button class="btn light" data-action="print" data-uid="${m._uid}">Print</button> <button class="btn danger" data-action="delete" data-uid="${m._uid}">Delete</button></td>
+  </tr>`).join("") || `<tr><td colspan="10">No members found.</td></tr>`;
+
+  $("memberPager").innerHTML = totalPages <= 1 ? "" : `
+    <span>Showing ${filtered.length ? start + 1 : 0}–${Math.min(start + MEMBER_PAGE_SIZE, filtered.length)} of ${filtered.length}</span>
+    <span style="display:flex;gap:8px;align-items:center">
+      <button type="button" class="btn light" ${memberPage <= 1 ? "disabled" : ""} onclick="changeMemberPage(-1)">‹ Prev</button>
+      <span>Page ${memberPage} of ${totalPages}</span>
+      <button type="button" class="btn light" ${memberPage >= totalPages ? "disabled" : ""} onclick="changeMemberPage(1)">Next ›</button>
+    </span>`;
+}
+function changeMemberPage(delta){
+  memberPage += delta;
+  renderMembers();
+}
+$("memberRows").addEventListener("click", e => {
+  const btn = e.target.closest("button[data-action]");
+  if (!btn) return;
+  if (btn.dataset.action === "edit") openMember(btn.dataset.uid);
+  else if (btn.dataset.action === "delete") deleteMember(btn.dataset.uid);
+  else if (btn.dataset.action === "print") printMember(btn.dataset.uid);
+});
+
+function blankMember(){
+  return { _uid: "", id: "GBC-" + String(data.members.length + 1).padStart(3, "0"), name: "", gender: "Female", dob: "", phone: "", email: "", family: "", fatherName: "", motherName: "", certNo: "", marital: "Single", baptism: "", baptismMinister: "", dedication: "", dedicationMinister: "", marriageDate: "", marriageMinister: "", marriageType: "", marriagePlace: "", join: "", occupation: "", education: "", nextKin: "", kinRelation: "", location: "", address: "", status: "Active Member", transferDirection: "", transferDate: "", transferReason: "", transferChurch: "", transferStatus: "", notes: "", documents: [], photo: "" };
+}
+let pendingNewMemberUid = null;   // holds the uid of an in-progress (not yet saved) Add-Member record, so Cancel can clean up any photo/documents already written to disk this session
+function memberTimeline(m){                     // built from the member's own dated fields, plus a cross-check against the roster modules for "Became ..." milestones
+  const events = [];
+  const add = (label, dateStr) => { if (dateStr && yearOf(dateStr)) events.push({ label, date: dateStr }); };
+  add("Born", m.dob);
+  add("Dedicated", m.dedication);
+  add("Baptized", m.baptism);
+  add("Joined Church", m.join);
+  add("Married", m.marriageDate);
+  const nameKey = (m.name || "").trim().toLowerCase();
+  if (nameKey){
+    const leader = data.leaders.find(x => (x.name || "").trim().toLowerCase() === nameKey);
+    if (leader) add("Became " + leader.category, leader.joinDate);
+    const cw = data.churchWorkers.find(x => (x.name || "").trim().toLowerCase() === nameKey);
+    if (cw) add("Became Church Worker", cw.joinDate);
+    const pw = data.paidWorkers.find(x => (x.name || "").trim().toLowerCase() === nameKey);
+    if (pw) add("Became Paid Worker", pw.joinDate);
+  }
+  return events.sort((a, b) => a.date < b.date ? -1 : a.date > b.date ? 1 : 0);
+}
+function renderMemberTimeline(m){
+  const events = memberTimeline(m);
+  if (!events.length){ $("mTimeline").innerHTML = `<span class="tl-empty">No dated milestones recorded yet — fill in Date of Birth, Baptism, Dedication, Membership, or Marriage dates below to build this member's timeline.</span>`; return; }
+  $("mTimeline").innerHTML = events.map((e, i) => {
+    const year = yearOf(e.date);
+    const item = `<div class="tl-item"><div class="tl-dot"></div><div class="tl-label">${esc(e.label)}</div><div class="tl-year">${year || esc(e.date)}</div></div>`;
+    return i < events.length - 1 ? item + `<div class="tl-arrow">→</div>` : item;
+  }).join("");
+}
+function openMember(uidToEdit){
+  const m = uidToEdit ? membersById.get(uidToEdit) : blankMember();
+  $("memberTitle").textContent = uidToEdit ? "Edit Member" : "Add Member";
+  $("mUid").value = uidToEdit || "";
+  $("mPrintBtn").style.display = uidToEdit ? "inline-block" : "none";
+  $("mCertBtn").style.display = uidToEdit ? "inline-block" : "none";
+  $("mId").closest(".field").classList.remove("invalid");
+  ["Id","Name","Gender","Dob","Phone","Email","Family","FatherName","MotherName","CertNo","Marital","Baptism","BaptismMinister","Dedication","DedicationMinister","MarriageDate","MarriageMinister","MarriageType","MarriagePlace","Join","Occupation","Education","NextKin","KinRelation","Location","Address","Status","TransferDirection","TransferDate","TransferReason","TransferChurch","TransferStatus","Notes"].forEach(k => {
+    const el = $("m" + k);
+    if (el) el.value = m[k.charAt(0).toLowerCase() + k.slice(1)] || "";
+  });
+  pendingPhoto = m.photo || "";
+  $("mPhoto").value = "";
+  showPhoto();
+  renderMemberTimeline(m);
+  showDocs("mDocList", m.documents || [], "member", uidToEdit || null);
+  $("mDocs").value = "";
+  $("mDocs").onchange = () => addDocs($("mDocs").files, "member", uidToEdit || null);
+  $("memberModal").classList.add("show");
+}
+async function saveMember(e){
+  e.preventDefault();
+  const editingUid = $("mUid").value || null;
+  const id = $("mId").value.trim();
+  const dupField = $("mId").closest(".field");
+  const duplicate = data.members.some(m => m.id === id && m._uid !== editingUid);
+  if (duplicate){ dupField.classList.add("invalid"); $("mId").focus(); return; }
+  dupField.classList.remove("invalid");
+
+  const existing = editingUid ? membersById.get(editingUid) : null;
+  const m = {
+    _uid: editingUid || uid(),
+    id, name: $("mName").value.trim(), gender: $("mGender").value, dob: $("mDob").value,
+    phone: $("mPhone").value, email: $("mEmail").value, family: $("mFamily").value,
+    fatherName: $("mFatherName").value, motherName: $("mMotherName").value, certNo: $("mCertNo").value,
+    marital: $("mMarital").value, baptism: $("mBaptism").value, baptismMinister: $("mBaptismMinister").value,
+    dedication: $("mDedication").value, dedicationMinister: $("mDedicationMinister").value,
+    marriageDate: $("mMarriageDate").value, marriageMinister: $("mMarriageMinister").value,
+    marriageType: $("mMarriageType").value, marriagePlace: $("mMarriagePlace").value,
+    join: $("mJoin").value,
+    occupation: $("mOccupation").value, education: $("mEducation").value,
+    nextKin: $("mNextKin").value, kinRelation: $("mKinRelation").value,
+    location: $("mLocation").value, address: $("mAddress").value, status: $("mStatus").value,
+    transferDirection: $("mTransferDirection").value, transferDate: $("mTransferDate").value, transferReason: $("mTransferReason").value.trim(), transferChurch: $("mTransferChurch").value.trim(), transferStatus: $("mTransferStatus").value,
+    notes: $("mNotes").value,
+    documents: existing ? existing.documents : [], photo: pendingPhoto
+  };
+  const saveBtn = $("mSaveBtn");
+  saveBtn.disabled = true;
+  try{
+    // pendingPhoto is either a freshly-compressed data: URL (new/changed upload), the
+    // untouched on-disk path from before (unchanged), or "" (removed). Only the first
+    // case needs writing to disk; replacePhotoFile() on the main-process side already
+    // clears out the old photo file for this entity before writing the new one.
+    if (isElectron() && pendingPhoto && pendingPhoto.startsWith("data:")){
+      const saved = await withTimeout(window.churchAPI.saveFile("members", m._uid, pendingPhoto, "photo.jpg", true), 15000, "Saving photo");
+      m.photo = saved.path;
+    } else if (isElectron() && !pendingPhoto && existing && existing.photo && !existing.photo.startsWith("data:")){
+      await withTimeout(window.churchAPI.deleteFile(existing.photo), 15000, "Removing photo");   // photo explicitly removed — clean up the orphaned file
+    }
+    if (existing) Object.assign(existing, m);
+    else data.members.push(m);
+    const famRec = ensureFamilyRecord(m.family);
+    if (famRec) await saveOne("families", famRec);
+
+    await saveOne("members", m);
+    closeModal("memberModal");
+    renderAll();
+    toast("Member saved.");
+  } catch(err){
+    console.error(err);
+    if (/taking too long/.test(err.message || "")) toast(err.message, true);   // the form stays open with everything the user typed, so nothing is lost — they can just try Save again
+  } finally {
+    saveBtn.disabled = false;
+  }
+}
+async function deleteMember(uidToDelete){
+  if (!confirm("Delete this member?")) return;
+  data.members = data.members.filter(m => m._uid !== uidToDelete);
+  await deleteOne("members", uidToDelete);
+  renderAll();
+  toast("Member deleted.");
+}
+async function previewPhoto(e){
+  const f = e.target.files[0];
+  if (!f) return;
+  if (f.size > MAX_PHOTO_BYTES) return toast("Photo must be under 5 MB.", true);
+  try{ pendingPhoto = await compressImage(f, PHOTO_MAX_DIM, PHOTO_QUALITY); }
+  catch(err){ console.error(err); toast("Could not process that image.", true); return; }
+  showPhoto();
+}
+function showPhoto(){
+  $("photoPreview").innerHTML = pendingPhoto
+    ? `<div style="margin-top:7px"><img class="photo" src="${photoUrl(pendingPhoto)}" alt=""><br><button type="button" class="btn danger" style="margin-top:5px" onclick="pendingPhoto='';showPhoto()">Remove</button></div>`
+    : "<small style='color:var(--muted)'>No passport photo selected.</small>";
+}
+
+/* ---------- families ---------- */
+function familyKey(m){ return (m.family || "").trim() || NO_FAMILY_LABEL; }
+function nextFamilyId(){
+  const max = data.families.reduce((n, f) => { const m = /^FAM-(\d+)$/.exec(f.famId); return m ? Math.max(n, +m[1]) : n; }, 0);
+  return "FAM-" + String(max + 1).padStart(3, "0");
+}
+function ensureFamilyRecord(name){                      // returns the family registry entry for a name, creating one (with a new Family ID) if needed
+  const clean = (name || "").trim();
+  if (!clean || clean === NO_FAMILY_LABEL) return null;
+  let rec = data.families.find(f => f.name.toLowerCase() === clean.toLowerCase());
+  if (!rec){ rec = { _uid: uid(), famId: nextFamilyId(), name: clean }; data.families.push(rec); }
+  return rec;
+}
+function familyIdFor(name){
+  const rec = data.families.find(f => f.name.toLowerCase() === (name || "").trim().toLowerCase());
+  return rec ? rec.famId : "—";
+}
+function onFamilySearchInput(){
+  clearTimeout(familySearchTimer);
+  familySearchTimer = setTimeout(renderFamilies, 180);
+}
+function renderFamilies(){
+  const q = ($("familySearch")?.value || "").trim().toLowerCase();
+  const map = new Map();
+  data.members.forEach(m => {
+    const key = familyKey(m);
+    if (!map.has(key)) map.set(key, []);
+    map.get(key).push(m);
+  });
+  familyGroups = Array.from(map.entries())
+    .map(([name, members]) => ({ name, members, famId: familyIdFor(name) }))
+    .filter(g => !q || g.name.toLowerCase().includes(q) || g.famId.toLowerCase().includes(q))
+    .sort((a, b) => (a.name === NO_FAMILY_LABEL) - (b.name === NO_FAMILY_LABEL) || a.name.localeCompare(b.name));
+  $("familyCount").textContent = familyGroups.length;
+  $("familyCards").innerHTML = familyGroups.map((g, idx) => `<div class="card familycard">
+    <div class="cardtitle"><div><h3>${esc(g.name)}</h3><small>${g.famId !== "—" ? `Family ID: <b>${esc(g.famId)}</b> · ` : ""}${g.members.length} member${g.members.length === 1 ? "" : "s"}</small></div></div>
+    <div class="famthumbs">${g.members.slice(0, 8).map(m => m.photo ? `<img class="thumb" loading="lazy" decoding="async" src="${photoUrl(m.photo)}" alt="">` : `<div class="thumb ph"></div>`).join("")}</div>
+    <div class="right">
+      <button class="btn light" data-action="view" data-idx="${idx}">View</button>
+      <button class="btn light" data-action="add" data-idx="${idx}">＋ Add Member</button>
+      <button class="btn primary" data-action="print" data-idx="${idx}">🖶 Print</button>
+      ${g.name !== NO_FAMILY_LABEL ? `<button class="btn danger" data-action="delete" data-idx="${idx}">Delete</button>` : ""}
+    </div>
+  </div>`).join("") || `<p>No families found.</p>`;
+}
+$("familyCards").addEventListener("click", e => {
+  const btn = e.target.closest("button[data-action]");
+  if (!btn) return;
+  const g = familyGroups[+btn.dataset.idx];
+  if (!g) return;
+  if (btn.dataset.action === "view") openFamily(g.name);
+  else if (btn.dataset.action === "add") addMemberToFamily(g.name);
+  else if (btn.dataset.action === "print") printFamily(g.name);
+  else if (btn.dataset.action === "delete") deleteFamily(g.name);
+});
+async function deleteFamily(name){                       // removes the family record AND every member in it, in one step
+  const members = data.members.filter(m => familyKey(m) === name);
+  const n = members.length;
+  if (!confirm(`Delete the family "${name}" and ${n === 0 ? "its record" : n === 1 ? "its 1 member" : "all " + n + " of its members"}?\n\nThis cannot be undone. Take a backup first if unsure.`)) return;
+  const recs = data.families.filter(f => f.name.toLowerCase() === name.toLowerCase());
+  const failed = [];
+  for (const m of members){
+    data.members = data.members.filter(x => x._uid !== m._uid);          // removed locally first (the browser fallback saves the whole list)
+    try{ await deleteOne("members", m._uid); }
+    catch(e){ data.members.push(m); failed.push(m.name || m.id); }
+  }
+  if (!failed.length){
+    for (const r of recs){
+      data.families = data.families.filter(x => x._uid !== r._uid);
+      try{ await deleteOne("families", r._uid); }
+      catch(e){ data.families.push(r); failed.push("family record"); }
+    }
+  }
+  renderAll();
+  if (failed.length) toast(`Could not delete: ${failed.join(", ")}. The rest was removed; please try again.`, true);
+  else toast(`Family "${name}" deleted${n ? " (" + n + " member" + (n === 1 ? "" : "s") + ")" : ""}.`);
+}
+async function newFamily(){
+  const name = prompt("New family name:");
+  if (!name || !name.trim()) return;
+  const rec = ensureFamilyRecord(name.trim());
+  if (rec) await saveOne("families", rec);
+  renderFamilies();
+  addMemberToFamily(name.trim());
+}
+function addMemberToFamily(name){
+  closeModal("familyModal");
+  openMember();
+  $("mFamily").value = name === NO_FAMILY_LABEL ? "" : name;
+}
+function openFamily(name){
+  currentFamily = name;
+  const famId = familyIdFor(name);
+  $("familyTitle").textContent = name;
+  $("familyIdInput").closest(".field").classList.remove("invalid");
+  const isRealFamily = name !== NO_FAMILY_LABEL;
+  $("familyIdInput").value = famId !== "—" ? famId : "";
+  $("familyIdInput").disabled = !isRealFamily;
+  $("familyIdInput").closest(".field").style.display = isRealFamily ? "" : "none";
+  const members = data.members.filter(m => familyKey(m) === name);
+  $("familyMemberRows").innerHTML = members.map(m => `<tr>
+    <td>${m.photo ? `<img class="thumb" loading="lazy" decoding="async" src="${photoUrl(m.photo)}" alt="">` : "—"}</td>
+    <td><b>${esc(m.name)}</b></td>
+    <td>${esc(m.gender)}</td>
+    <td>${esc(fmtD(m.dob)) || "—"}</td>
+    <td>${esc(m.phone) || "—"}</td>
+    <td><span class="pill">${esc(m.status)}</span></td>
+    <td><button class="btn light" data-uid="${m._uid}" data-action="edit">Edit</button> <button class="btn light" data-uid="${m._uid}" data-action="print">Print</button></td>
+  </tr>`).join("") || `<tr><td colspan="7">No members in this family yet.</td></tr>`;
+  $("familyModal").classList.add("show");
+}
+async function saveFamilyId(){
+  const field = $("familyIdInput").closest(".field");
+  const newId = $("familyIdInput").value.trim();
+  field.classList.remove("invalid");
+  if (!currentFamily || currentFamily === NO_FAMILY_LABEL) return;
+  if (!newId){ toast("Family ID can't be blank.", true); return; }
+  const rec = ensureFamilyRecord(currentFamily);
+  if (!rec) return;
+  const clash = data.families.some(f => f._uid !== rec._uid && f.famId.toLowerCase() === newId.toLowerCase());
+  if (clash){ field.classList.add("invalid"); $("familyIdInput").focus(); return; }
+  rec.famId = newId;
+  await saveOne("families", rec);
+  renderFamilies();
+  $("familyTitle").textContent = currentFamily;
+  toast("Family ID updated.");
+}
+$("familyMemberRows").addEventListener("click", e => {
+  const btn = e.target.closest("button[data-uid]");
+  if (!btn) return;
+  if (btn.dataset.action === "print") { printMember(btn.dataset.uid); return; }
+  closeModal("familyModal");
+  openMember(btn.dataset.uid);
+});
+function printFamily(name){
+  const members = data.members.filter(m => familyKey(m) === name);
+  const famId = familyIdFor(name);
+  const baptisedCount = members.filter(m => m.baptism).length;
+  const rows = members.map(m => `<tr>
+    <td>${m.photo ? `<img src="${photoUrl(m.photo)}" alt="${esc(m.name)}" style="width:38px;height:48px;object-fit:cover;border-radius:4px">` : ""}</td>
+    <td>${esc(m.name)}</td><td>${esc(m.gender)}</td><td>${esc(fmtD(m.dob)) || ""}</td>
+    <td>${esc(m.marital) || ""}</td>
+    <td>${esc(fmtD(m.marriageDate)) || ""}</td>
+    <td>${m.baptism ? "Baptised (" + esc(fmtD(m.baptism)) + ")" : "Not Baptised"}</td>
+    <td>${esc(m.baptismMinister) || ""}</td>
+    <td>${esc(m.status)}</td>
+  </tr>`).join("");
+  const body = `${famId !== "—" ? `<p style="font-size:12px"><b>Family ID:</b> ${esc(famId)}</p>` : ""}<table><tr><th>Photo</th><th>Name</th><th>Gender</th><th>DOB</th><th>Marital Status</th><th>Marriage Date</th><th>Baptism Status</th><th>Baptism Minister</th><th>Status</th></tr>${rows}</table><p style="margin-top:16px;font-size:11px">Total family members: <b>${members.length}</b> · Baptised: <b>${baptisedCount}</b> · Not Baptised: <b>${members.length - baptisedCount}</b></p>`;
+  printShell("FAMILY RECORD — " + name, body);
+}
+
+/* ---------- departments (CMF / CYF / CWF / etc. — draw on existing members, don't create new people) ---------- */
+let currentDept = null;
+function renderDepartments(){
+  const q = ($("deptSearch")?.value || "").trim().toLowerCase();
+  const list = data.departments.filter(d => !q || d.name.toLowerCase().includes(q) || (d.id || "").toLowerCase().includes(q));
+  $("deptCount").textContent = data.departments.length;
+  $("deptCards").innerHTML = list.map(d => `<div class="card familycard">
+    <div class="cardtitle"><div><h3>${esc(d.id)} — ${esc(d.name)}</h3><small>${d.memberUids.length} member${d.memberUids.length === 1 ? "" : "s"}${d.description ? " · " + esc(d.description) : ""}</small></div></div>
+    <div class="right"><button class="btn light" data-uid="${d._uid}" data-action="view">View / Manage</button></div>
+  </div>`).join("") || `<p>No departments found.</p>`;
+}
+$("deptCards").addEventListener("click", e => {
+  const btn = e.target.closest("button[data-uid]");
+  if (!btn) return;
+  openDepartment(btn.dataset.uid);
+});
+function newDepartment(){
+  currentDept = null;
+  $("deptModalTitle").textContent = "New Department";
+  $("deptCode").value = ""; $("deptName").value = ""; $("deptDesc").value = "";
+  $("deptDeleteBtn").style.display = "none";
+  $("deptAddMember").innerHTML = `<option value="">Select a member…</option>`;
+  $("deptMemberRows").innerHTML = `<tr><td colspan="5">Save the department first, then add members.</td></tr>`;
+  $("departmentModal").classList.add("show");
+}
+function openDepartment(deptUid){
+  const d = data.departments.find(x => x._uid === deptUid);
+  if (!d) return;
+  currentDept = deptUid;
+  $("deptModalTitle").textContent = d.id + " — " + d.name;
+  $("deptCode").value = d.id; $("deptName").value = d.name; $("deptDesc").value = d.description || "";
+  $("deptDeleteBtn").style.display = "";
+  renderDeptMembers();
+  $("departmentModal").classList.add("show");
+}
+function renderDeptMembers(){
+  const d = data.departments.find(x => x._uid === currentDept);
+  if (!d) return;
+  const memberSet = new Set(d.memberUids);
+  const members = data.members.filter(m => memberSet.has(m._uid)).sort((a, b) => a.name.localeCompare(b.name));
+  $("deptMemberRows").innerHTML = members.map(m => `<tr>
+    <td>${m.photo ? `<img class="thumb" loading="lazy" decoding="async" src="${photoUrl(m.photo)}" alt="">` : "—"}</td>
+    <td><b>${esc(m.name)}</b></td>
+    <td>${esc(m.phone) || "—"}</td>
+    <td><span class="pill">${esc(m.status)}</span></td>
+    <td><button class="btn light" data-uid="${m._uid}" data-action="remove">Remove</button></td>
+  </tr>`).join("") || `<tr><td colspan="5">No members added yet.</td></tr>`;
+  const available = data.members.filter(m => !memberSet.has(m._uid)).sort((a, b) => a.name.localeCompare(b.name));
+  $("deptAddMember").innerHTML = `<option value="">Select a member…</option>` + available.map(m => `<option value="${m._uid}">${esc(m.name)} (${esc(m.id)})</option>`).join("");
+}
+$("deptMemberRows").addEventListener("click", e => {
+  const btn = e.target.closest("button[data-uid]");
+  if (!btn) return;
+  removeMemberFromDept(btn.dataset.uid);
+});
+async function saveDepartmentDetails(){
+  const code = $("deptCode").value.trim().toUpperCase();
+  const name = $("deptName").value.trim();
+  const description = $("deptDesc").value.trim();
+  if (!code || !name) return toast("Department code and name are required.", true);
+  const duplicate = data.departments.some(d => d.id === code && d._uid !== currentDept);
+  if (duplicate) return toast("A department with that code already exists.", true);
+  let d = currentDept ? data.departments.find(x => x._uid === currentDept) : null;
+  if (d){
+    d.id = code; d.name = name; d.description = description;
+  } else {
+    d = { _uid: uid(), id: code, name, description, memberUids: [] };
+    data.departments.push(d);
+    currentDept = d._uid;
+  }
+  await saveOne("departments", d);
+  $("deptModalTitle").textContent = d.id + " — " + d.name;
+  $("deptDeleteBtn").style.display = "";
+  renderDeptMembers();
+  renderDepartments();
+  toast("Department saved.");
+}
+async function deleteDepartment(){
+  if (!currentDept || !confirm("Delete this department? Members themselves will not be affected.")) return;
+  data.departments = data.departments.filter(d => d._uid !== currentDept);
+  await deleteOne("departments", currentDept);
+  closeModal("departmentModal");
+  renderDepartments();
+  toast("Department deleted.");
+}
+async function addMemberToDept(){
+  const memberUid = $("deptAddMember").value;
+  const d = data.departments.find(x => x._uid === currentDept);
+  if (!memberUid || !d) return;
+  if (!d.memberUids.includes(memberUid)) d.memberUids.push(memberUid);
+  await saveOne("departments", d);
+  renderDeptMembers();
+  renderDepartments();
+}
+async function removeMemberFromDept(memberUid){
+  const d = data.departments.find(x => x._uid === currentDept);
+  if (!d) return;
+  d.memberUids = d.memberUids.filter(u => u !== memberUid);
+  await saveOne("departments", d);
+  renderDeptMembers();
+  renderDepartments();
+}
+function printDepartment(){
+  const d = data.departments.find(x => x._uid === currentDept);
+  if (!d) return toast("Save the department first, then print.", true);
+  const memberSet = new Set(d.memberUids);
+  const members = data.members.filter(m => memberSet.has(m._uid)).sort((a, b) => a.name.localeCompare(b.name));
+  const rows = members.map(m => `<tr><td>${esc(m.id)}</td><td>${esc(m.name)}</td><td>${esc(m.gender)}</td><td>${esc(m.phone) || ""}</td><td>${esc(m.status)}</td></tr>`).join("") || `<tr><td colspan="5">No members in this department yet.</td></tr>`;
+  const body = `${d.description ? `<p style="font-size:12px">${esc(d.description)}</p>` : ""}<table><tr><th>ID</th><th>Name</th><th>Gender</th><th>Phone</th><th>Status</th></tr>${rows}</table><p style="margin-top:16px;font-size:11px">Total members: <b>${members.length}</b></p>`;
+  printShell(d.id + " — " + d.name, body);
+}
+
+/* ---------- church events & calendar ---------- */
+let currentEvent = null;
+function renderCalendar(){
+  const year = calCursor.getFullYear(), month = calCursor.getMonth();
+  $("calMonthLabel").textContent = calCursor.toLocaleDateString(undefined, { month: "long", year: "numeric" });
+  const startWeekday = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const daysInPrevMonth = new Date(year, month, 0).getDate();
+  const todayStr = new Date().toISOString().slice(0, 10);
+  const eventsByDate = new Map();
+  data.churchEvents.forEach(ev => { if (!ev.date) return; if (!eventsByDate.has(ev.date)) eventsByDate.set(ev.date, []); eventsByDate.get(ev.date).push(ev); });
+  let html = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(d => `<div class="cal-dow">${d}</div>`).join("");
+  for (let i = startWeekday - 1; i >= 0; i--) html += `<div class="cal-day other"><div class="cal-daynum">${daysInPrevMonth - i}</div></div>`;
+  for (let day = 1; day <= daysInMonth; day++){
+    const dateStr = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+    const evs = eventsByDate.get(dateStr) || [];
+    html += `<div class="cal-day${dateStr === todayStr ? " today" : ""}" data-date="${dateStr}">
+      <div class="cal-daynum">${day}</div>
+      ${evs.slice(0, 3).map(ev => `<div class="cal-evt" data-uid="${ev._uid}" title="${esc(ev.title)}">${esc(ev.title)}</div>`).join("")}
+      ${evs.length > 3 ? `<div style="font-size:9px;color:var(--muted)">+${evs.length - 3} more</div>` : ""}
+    </div>`;
+  }
+  const trailing = (7 - ((startWeekday + daysInMonth) % 7)) % 7;
+  for (let day = 1; day <= trailing; day++) html += `<div class="cal-day other"><div class="cal-daynum">${day}</div></div>`;
+  $("calGrid").innerHTML = html;
+}
+function calShiftMonth(delta){
+  calCursor = new Date(calCursor.getFullYear(), calCursor.getMonth() + delta, 1);
+  renderCalendar();
+}
+$("calGrid").addEventListener("click", e => {
+  const evEl = e.target.closest(".cal-evt");
+  if (evEl){ openEvent(evEl.dataset.uid); return; }
+  const dayEl = e.target.closest(".cal-day[data-date]");
+  if (dayEl) newEvent(dayEl.dataset.date);
+});
+function formatEventDate(dateStr){
+  if (!dateStr) return "";
+  if (!usableDate(dateStr)) return fmtD(dateStr);
+  return new Date(dateStr + "T00:00:00").toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
+}
+function renderEventList(){
+  const todayStr = new Date().toISOString().slice(0, 10);
+  const upcoming = data.churchEvents.filter(ev => ev.date >= todayStr).sort((a, b) => a.date < b.date ? -1 : a.date > b.date ? 1 : (a.time || "").localeCompare(b.time || ""));
+  $("eventCount").textContent = upcoming.length;
+  $("eventList").innerHTML = upcoming.map(ev => `<div class="eventrow">
+    <div><b>${esc(ev.title)}</b><br><small style="color:var(--muted)">${ev.time ? esc(ev.time) + " · " : ""}${esc(ev.location) || "No location set"}</small></div>
+    <div style="display:flex;align-items:center;gap:8px"><span class="evdate">${esc(formatEventDate(ev.date))}</span><button class="btn light" data-uid="${ev._uid}">Edit</button></div>
+  </div>`).join("") || `<p>No upcoming events. Click a date on the calendar, or "New Event" to add one.</p>`;
+}
+$("eventList").addEventListener("click", e => {
+  const btn = e.target.closest("button[data-uid]");
+  if (btn) openEvent(btn.dataset.uid);
+});
+function newEvent(prefillDate){
+  currentEvent = null;
+  $("eventModalTitle").textContent = "New Event";
+  $("evTitle").value = ""; $("evDate").value = prefillDate || ""; $("evTime").value = ""; $("evLocation").value = ""; $("evOrganizer").value = ""; $("evNotes").value = "";
+  $("eventDeleteBtn").style.display = "none";
+  $("eventModal").classList.add("show");
+}
+function openEvent(eventUid){
+  const ev = data.churchEvents.find(x => x._uid === eventUid);
+  if (!ev) return;
+  currentEvent = eventUid;
+  $("eventModalTitle").textContent = "Edit Event";
+  $("evTitle").value = ev.title; $("evDate").value = ev.date; $("evTime").value = ev.time || ""; $("evLocation").value = ev.location || ""; $("evOrganizer").value = ev.organizer || ""; $("evNotes").value = ev.notes || "";
+  $("eventDeleteBtn").style.display = "";
+  $("eventModal").classList.add("show");
+}
+async function saveEvent(){
+  const title = $("evTitle").value.trim();
+  const date = $("evDate").value;
+  if (!title || !date) return toast("Event title and date are required.", true);
+  const fields = { title, date, time: $("evTime").value, location: $("evLocation").value.trim(), organizer: $("evOrganizer").value.trim(), notes: $("evNotes").value.trim() };
+  let ev = currentEvent ? data.churchEvents.find(x => x._uid === currentEvent) : null;
+  if (ev) Object.assign(ev, fields);
+  else { ev = { _uid: uid(), ...fields }; data.churchEvents.push(ev); }
+  await saveOne("churchEvents", ev);
+  closeModal("eventModal");
+  renderCalendar();
+  renderEventList();
+  toast("Event saved.");
+}
+async function deleteEvent(){
+  if (!currentEvent || !confirm("Delete this event?")) return;
+  data.churchEvents = data.churchEvents.filter(x => x._uid !== currentEvent);
+  await deleteOne("churchEvents", currentEvent);
+  closeModal("eventModal");
+  renderCalendar();
+  renderEventList();
+  toast("Event deleted.");
+}
+
+/* ---------- church history timeline (retrospective milestones — distinct from the upcoming-events calendar above) ---------- */
+let currentHistory = null;
+function renderChurchHistory(){
+  const sorted = [...data.churchHistory].sort((a, b) => (a.date || "") < (b.date || "") ? -1 : (a.date || "") > (b.date || "") ? 1 : 0);
+  $("historyCount").textContent = sorted.length;
+  $("historyTimeline").innerHTML = sorted.map(h => `<div class="tl-item" data-uid="${h._uid}">
+    <div class="tl-date">${esc(formatEventDate(h.date))}</div>
+    <div class="tl-title">${esc(h.title)}</div>
+    ${h.description ? `<div class="tl-desc">${esc(h.description)}</div>` : ""}
+  </div>`).join("") || `<p>No milestones recorded yet. Click "Add Milestone" to start your church's timeline.</p>`;
+}
+$("historyTimeline").addEventListener("click", e => {
+  const item = e.target.closest(".tl-item[data-uid]");
+  if (item) openHistoryEntry(item.dataset.uid);
+});
+function newHistoryEntry(){
+  currentHistory = null;
+  $("historyModalTitle").textContent = "New Milestone";
+  $("hDate").value = ""; $("hTitle").value = ""; $("hDesc").value = "";
+  $("historyDeleteBtn").style.display = "none";
+  $("historyModal").classList.add("show");
+}
+function openHistoryEntry(historyUid){
+  const h = data.churchHistory.find(x => x._uid === historyUid);
+  if (!h) return;
+  currentHistory = historyUid;
+  $("historyModalTitle").textContent = "Edit Milestone";
+  $("hDate").value = h.date || ""; $("hTitle").value = h.title; $("hDesc").value = h.description || "";
+  $("historyDeleteBtn").style.display = "";
+  $("historyModal").classList.add("show");
+}
+async function saveHistoryEntry(){
+  const title = $("hTitle").value.trim();
+  const date = $("hDate").value;
+  if (!title || !date) return toast("Title and date are required.", true);
+  const fields = { title, date, description: $("hDesc").value.trim() };
+  let h = currentHistory ? data.churchHistory.find(x => x._uid === currentHistory) : null;
+  if (h) Object.assign(h, fields);
+  else { h = { _uid: uid(), ...fields }; data.churchHistory.push(h); }
+  await saveOne("churchHistory", h);
+  closeModal("historyModal");
+  renderChurchHistory();
+  toast("Milestone saved.");
+}
+async function deleteHistoryEntry(){
+  if (!currentHistory || !confirm("Delete this milestone?")) return;
+  data.churchHistory = data.churchHistory.filter(x => x._uid !== currentHistory);
+  await deleteOne("churchHistory", currentHistory);
+  closeModal("historyModal");
+  renderChurchHistory();
+  toast("Milestone deleted.");
+}
+function printChurchHistory(){
+  const sorted = [...data.churchHistory].sort((a, b) => (a.date || "") < (b.date || "") ? -1 : (a.date || "") > (b.date || "") ? 1 : 0);
+  const rows = sorted.map(h => `<div style="margin-bottom:14px"><b>${esc(formatEventDate(h.date))} — ${esc(h.title)}</b>${h.description ? `<div style="font-size:12px;margin-top:2px;text-align:justify">${esc(h.description)}</div>` : ""}</div>`).join("") || "<p>No milestones recorded yet.</p>";
+  printShell("CHURCH HISTORY TIMELINE", rows);
+}
+
+/* ---------- roster modules (Deacon Board / Church Workers / Paid Workers) ---------- */
+const ROSTER_TYPES = {
+  leaders: { title: "Deacon Board", prefix: "DB", categories: ["Pastor", "Deacon"], rowsEl: "leaderRows", countEl: "leaderCount", searchEl: "leaderSearch" },
+  churchWorkers: { title: "Church Workers", prefix: "CWK", categories: [], rowsEl: "churchWorkerRows", countEl: "churchWorkerCount", searchEl: "churchWorkerSearch" },
+  paidWorkers: { title: "Paid Workers", prefix: "PWK", categories: [], rowsEl: "paidWorkerRows", countEl: "paidWorkerCount", searchEl: "paidWorkerSearch" }
+};
+let rosterById = { leaders: new Map(), churchWorkers: new Map(), paidWorkers: new Map() };
+let rosterSearchTimers = {};
+let pendingRosterPhoto = "";
+
+function onRosterSearchInput(type){
+  clearTimeout(rosterSearchTimers[type]);
+  rosterSearchTimers[type] = setTimeout(() => renderRoster(type), 180);
+}
+function blankRosterEntry(type){
+  const cfg = ROSTER_TYPES[type];
+  return { _uid: "", id: cfg.prefix + "-" + String((data[type].length + 1)).padStart(3, "0"), name: "", category: cfg.categories[0] || "", role: "", phone: "", email: "", joinDate: "", status: "Active", notes: "", photo: "" };
+}
+function renderRoster(type){
+  const cfg = ROSTER_TYPES[type];
+  const hasCategory = cfg.categories.length > 0;
+  const list = data[type];
+  const q = ($(cfg.searchEl)?.value || "").trim().toLowerCase();
+  const rows = q ? list.filter(x => [x.id, x.name, x.role, x.phone, x.email].join(" ").toLowerCase().includes(q)) : list;
+  rosterById[type] = new Map(list.map(x => [x._uid, x]));
+  $(cfg.countEl).textContent = list.length;
+  $(cfg.rowsEl).innerHTML = rows.map(x => `<tr>
+    <td>${x.photo ? `<img class="thumb" loading="lazy" decoding="async" src="${photoUrl(x.photo)}" alt="">` : "—"}</td>
+    <td>${esc(x.id)}</td>
+    <td><b>${esc(x.name)}</b></td>
+    ${hasCategory ? `<td>${esc(x.category)}</td>` : ""}
+    <td>${esc(x.role) || "—"}</td>
+    <td>${esc(x.phone) || "—"}</td>
+    <td><span class="pill">${esc(x.status)}</span></td>
+    <td><button class="btn light" data-action="edit" data-uid="${x._uid}">Edit</button> <button class="btn light" data-action="print" data-uid="${x._uid}">Print</button> <button class="btn danger" data-action="delete" data-uid="${x._uid}">Delete</button></td>
+  </tr>`).join("") || `<tr><td colspan="${hasCategory ? 8 : 7}">No records found.</td></tr>`;
+}
+$("leaderRows").addEventListener("click", e => rosterRowClick(e, "leaders"));
+$("churchWorkerRows").addEventListener("click", e => rosterRowClick(e, "churchWorkers"));
+$("paidWorkerRows").addEventListener("click", e => rosterRowClick(e, "paidWorkers"));
+function rosterRowClick(e, type){
+  const btn = e.target.closest("button[data-action]");
+  if (!btn) return;
+  if (btn.dataset.action === "edit") openRosterEntry(type, btn.dataset.uid);
+  else if (btn.dataset.action === "print") printRosterMember(type, btn.dataset.uid);
+  else if (btn.dataset.action === "delete") deleteRosterEntry(type, btn.dataset.uid);
+}
+function openRosterEntry(type, uidToEdit){
+  const cfg = ROSTER_TYPES[type];
+  const x = uidToEdit ? rosterById[type].get(uidToEdit) : blankRosterEntry(type);
+  $("rosterTitle").textContent = (uidToEdit ? "Edit " : "Add ") + cfg.title + " Entry";
+  $("rUid").value = uidToEdit || "";
+  $("rType").value = type;
+  $("rId").closest(".field").classList.remove("invalid");
+  $("rId").value = x.id; $("rName").value = x.name; $("rRole").value = x.role;
+  $("rPhone").value = x.phone; $("rEmail").value = x.email; $("rJoinDate").value = x.joinDate;
+  $("rStatus").value = x.status; $("rNotes").value = x.notes;
+  const hasCategory = cfg.categories.length > 0;
+  $("rCategoryField").style.display = hasCategory ? "" : "none";
+  if (hasCategory){
+    $("rCategory").innerHTML = cfg.categories.map(c => `<option>${esc(c)}</option>`).join("");
+    $("rCategory").value = x.category;
+  }
+  pendingRosterPhoto = x.photo || "";
+  $("rPhoto").value = "";
+  showRosterPhoto();
+  $("rPrintBtn").style.display = uidToEdit ? "inline-block" : "none";
+  $("rosterModal").classList.add("show");
+}
+async function saveRosterEntry(e){
+  e.preventDefault();
+  const type = $("rType").value;
+  const cfg = ROSTER_TYPES[type];
+  const editingUid = $("rUid").value || null;
+  const id = $("rId").value.trim();
+  const dupField = $("rId").closest(".field");
+  const duplicate = data[type].some(x => x.id === id && x._uid !== editingUid);
+  if (duplicate){ dupField.classList.add("invalid"); $("rId").focus(); return; }
+  dupField.classList.remove("invalid");
+
+  const existing = editingUid ? rosterById[type].get(editingUid) : null;
+  const entry = { _uid: editingUid || uid(), id, name: $("rName").value.trim(), category: $("rCategory").value, role: $("rRole").value, phone: $("rPhone").value, email: $("rEmail").value, joinDate: $("rJoinDate").value, status: $("rStatus").value, notes: $("rNotes").value, photo: pendingRosterPhoto };
+  const rSaveBtn = $("rosterForm").querySelector("button.btn.primary");
+  if (rSaveBtn) rSaveBtn.disabled = true;
+  try{
+    if (isElectron() && pendingRosterPhoto && pendingRosterPhoto.startsWith("data:")){
+      const saved = await withTimeout(window.churchAPI.saveFile(type, entry._uid, pendingRosterPhoto, "photo.jpg", true), 15000, "Saving photo");
+      entry.photo = saved.path;
+    } else if (isElectron() && !pendingRosterPhoto && existing && existing.photo && !existing.photo.startsWith("data:")){
+      await withTimeout(window.churchAPI.deleteFile(existing.photo), 15000, "Removing photo");
+    }
+    if (existing) Object.assign(existing, entry);
+    else data[type].push(entry);
+
+    await saveOne(type, entry);
+    closeModal("rosterModal");
+    renderRoster(type);
+    toast(cfg.title + " entry saved.");
+  } catch(err){
+    console.error(err);
+    if (/taking too long/.test(err.message || "")) toast(err.message, true);
+  } finally {
+    if (rSaveBtn) rSaveBtn.disabled = false;
+  }
+}
+async function deleteRosterEntry(type, uidToDelete){
+  if (!confirm("Delete this entry?")) return;
+  data[type] = data[type].filter(x => x._uid !== uidToDelete);
+  await deleteOne(type, uidToDelete);
+  renderRoster(type);
+  toast("Entry deleted.");
+}
+async function previewRosterPhoto(e){
+  const f = e.target.files[0];
+  if (!f) return;
+  if (f.size > MAX_PHOTO_BYTES) return toast("Photo must be under 5 MB.", true);
+  try{ pendingRosterPhoto = await compressImage(f, PHOTO_MAX_DIM, PHOTO_QUALITY); }
+  catch(err){ console.error(err); toast("Could not process that image.", true); return; }
+  showRosterPhoto();
+}
+function showRosterPhoto(){
+  $("rPhotoPreview").innerHTML = pendingRosterPhoto
+    ? `<div style="margin-top:7px"><img class="photo" src="${photoUrl(pendingRosterPhoto)}" alt=""><br><button type="button" class="btn danger" style="margin-top:5px" onclick="pendingRosterPhoto='';showRosterPhoto()">Remove</button></div>`
+    : "<small style='color:var(--muted)'>No photo selected.</small>";
+}
+function printRoster(type){
+  const cfg = ROSTER_TYPES[type];
+  const hasCategory = cfg.categories.length > 0;
+  const rows = data[type].map(x => `<tr><td>${esc(x.id)}</td><td>${esc(x.name)}</td>${hasCategory ? `<td>${esc(x.category)}</td>` : ""}<td>${esc(x.role)}</td><td>${esc(x.phone)}</td><td>${esc(x.email)}</td><td>${esc(x.status)}</td></tr>`).join("");
+  const body = `<table><tr><th>ID</th><th>Name</th>${hasCategory ? "<th>Category</th>" : ""}<th>Position</th><th>Phone</th><th>Email</th><th>Status</th></tr>${rows}</table><p style="margin-top:16px;font-size:11px">Total: <b>${data[type].length}</b></p>`;
+  printShell(cfg.title.toUpperCase() + " DIRECTORY", body);
+}
+function printRosterMember(type, entryUid){                 // individual profile — same layout language as printMember()
+  const cfg = ROSTER_TYPES[type];
+  const x = rosterById[type].get(entryUid) || data[type].find(r => r._uid === entryUid);
+  if (!x) return toast("Save the entry first, then print.", true);
+  const hasCategory = cfg.categories.length > 0;
+  const row = (label, val) => `<div class="pmrow"><span class="pmlabel">${esc(label)}</span><span class="pmval">${esc(val) || "—"}</span></div>`;
+  const body = `
+    <div class="pmhead">
+      ${x.photo ? `<img class="pmphoto" src="${photoUrl(x.photo)}" alt="${esc(x.name)}">` : `<div class="pmphoto pmphoto-empty">No Photo</div>`}
+      <div><h2 style="margin:0">${esc(x.name)}</h2><p style="margin:4px 0"><b>ID:</b> ${esc(x.id)} &nbsp; <span class="pmstatus">${esc(x.status)}</span></p></div>
+    </div>
+    <div class="pmgrid">
+      <div><h4>${esc(cfg.title)}</h4>${hasCategory ? row("Category", x.category) : ""}${row("Position", x.role)}${row("Date Joined", x.joinDate)}${row("Status", x.status)}</div>
+      <div><h4>Contact</h4>${row("Phone", x.phone)}${row("Email", x.email)}</div>
+    </div>
+    <div class="pmnotes"><h4>Notes</h4><p class="pmnotetext">${esc(x.notes) || "—"}</p></div>`;
+  printShell(cfg.title.toUpperCase() + " — " + x.name, body);
+}
+
+/* ---------- shared document handling (members + deaths) ---------- */
+const DOC_LIST_NAME = { member: "members", death: "deaths" };
+async function addDocs(files, type, recUid){
+  if (!recUid) return toast("Save the record first, then upload documents.", true);
+  const rec = type === "member" ? membersById.get(recUid) : deathsById.get(recUid);
+  if (!rec) return;
+  const listName = DOC_LIST_NAME[type];
+  for (const f of Array.from(files)){
+    if (f.size > MAX_DOC_BYTES) { toast(f.name + " is over 10 MB — skipped.", true); continue; }
+    let dataUrl;
+    try{ dataUrl = await readAsDataURL(f); }
+    catch(err){ console.error(err); toast("Could not read " + f.name, true); continue; }
+    if (isElectron()){
+      try{
+        const saved = await withTimeout(window.churchAPI.saveFile(listName, recUid, dataUrl, f.name, false), 15000, "Uploading " + f.name);
+        rec.documents.push({ name: f.name, size: f.size, type: f.type, path: saved.path });
+      } catch(err){ console.error(err); toast(err.message, true); continue; }
+    } else {
+      rec.documents.push({ name: f.name, size: f.size, type: f.type, data: dataUrl });
+    }
+  }
+  await saveOne(listName, rec);
+  showDocs(type === "member" ? "mDocList" : "dDocList", rec.documents, type, recUid);
+  backupInfo();
+}
+function showDocs(id, docs, type, recUid){
+  $(id).innerHTML = docs.length
+    ? docs.map((d, j) => `<div class="doc"><span>📄 ${esc(d.name)} (${Math.round((d.size || 0) / 1024)} KB)</span><span class="docbtns"><button type="button" onclick="viewDoc('${type}','${recUid}',${j})">View</button> <button type="button" onclick="saveDoc('${type}','${recUid}',${j})">Save</button> <button type="button" class="x" onclick="removeDoc('${type}','${recUid}',${j})">Delete</button></span></div>`).join("")
+    : "<small style='color:var(--muted)'>No documents uploaded.</small>";
+}
+function getDoc(t, recUid, j){
+  const rec = t === "member" ? membersById.get(recUid) : deathsById.get(recUid);
+  return rec ? rec.documents[j] : null;
+}
+function viewDoc(t, recUid, j){
+  const d = getDoc(t, recUid, j);
+  if (!d) return;
+  const isViewable = d.type === "application/pdf" || (d.type || "").startsWith("image/");
+  if (!isViewable) return saveDoc(t, recUid, j);
+  const w = window.open();
+  if (!w) return toast("Please allow pop-ups to view documents.", true);
+  w.document.write(`<iframe src="${photoUrl(d.data || d.path)}" style="border:0;width:100vw;height:100vh"></iframe>`);
+}
+async function saveDoc(t, recUid, j){
+  const d = getDoc(t, recUid, j);
+  if (!d) return;
+  if (d.path && isElectron()){
+    try{ await withTimeout(window.churchAPI.downloadFile(d.path, d.name), 15000, "Preparing download"); }
+    catch(err){ console.error(err); toast(err.message, true); }
+    return;
+  }
+  const a = document.createElement("a");
+  a.href = d.data; a.download = d.name; a.click();
+}
+async function removeDoc(t, recUid, j){
+  if (!confirm("Delete this document?")) return;
+  const rec = t === "member" ? membersById.get(recUid) : deathsById.get(recUid);
+  if (!rec) return;
+  const [doc] = rec.documents.splice(j, 1);
+  if (isElectron() && doc && doc.path){
+    try{ await withTimeout(window.churchAPI.deleteFile(doc.path), 15000, "Removing document"); }
+    catch(err){ console.error(err); }   // the record row is still updated/removed below either way — an orphaned file on disk is harmless and cheaper to accept than blocking the user on it
+  }
+  await saveOne(DOC_LIST_NAME[t], rec);
+  showDocs(t === "member" ? "mDocList" : "dDocList", rec.documents, t, recUid);
+  backupInfo();
+}
+
+/* ---------- deaths ---------- */
+function renderDeaths(){
+  deathsById = new Map(data.deaths.map(d => [d._uid, d]));
+  const membersByBizId = new Map(data.members.map(m => [m.id, m]));
+  $("deathRows").innerHTML = data.deaths.map(d => {
+    const m = membersByBizId.get(d.member);
+    return `<tr>
+      <td>${esc(m ? m.name : d.member)}</td>
+      <td>${esc(fmtD(m ? m.dob : "")) || "—"}</td>
+      <td>${esc(fmtD(d.date))}</td>
+      <td>${esc(d.place) || "—"}</td>
+      <td>${esc(d.notes) || "—"}</td>
+      <td>${(d.documents || []).length || "—"}</td>
+      <td><button class="btn light" data-action="edit" data-uid="${d._uid}">Edit</button> <button class="btn danger" data-action="delete" data-uid="${d._uid}">Delete</button></td>
+    </tr>`;
+  }).join("") || `<tr><td colspan="7">No death records.</td></tr>`;
+}
+$("deathRows").addEventListener("click", e => {
+  const btn = e.target.closest("button[data-action]");
+  if (!btn) return;
+  if (btn.dataset.action === "edit") openDeath(btn.dataset.uid);
+  else if (btn.dataset.action === "delete") deleteDeath(btn.dataset.uid);
+});
+function openDeath(uidToEdit){
+  const d = uidToEdit ? deathsById.get(uidToEdit) : { _uid: "", member: data.members[0]?.id || "", date: "", place: "", notes: "", documents: [] };
+  $("dUid").value = uidToEdit || "";
+  $("dMember").innerHTML = data.members.map(m => `<option value="${esc(m.id)}">${esc(m.id)} — ${esc(m.name)}</option>`).join("");
+  $("dMember").value = d.member;
+  $("dDate").value = d.date;
+  $("dPlace").value = d.place;
+  $("dNotes").value = d.notes;
+  $("dDocs").value = "";
+  showDocs("dDocList", d.documents || [], "death", uidToEdit || null);
+  $("dDocs").onchange = () => addDocs($("dDocs").files, "death", uidToEdit || null);
+  $("deathModal").classList.add("show");
+}
+async function saveDeath(e){
+  e.preventDefault();
+  const editingUid = $("dUid").value || null;
+  const existing = editingUid ? deathsById.get(editingUid) : null;
+  const d = { _uid: editingUid || uid(), member: $("dMember").value, date: $("dDate").value, place: $("dPlace").value, notes: $("dNotes").value, documents: existing ? existing.documents : [] };
+  if (existing) Object.assign(existing, d);
+  else data.deaths.push(d);
+  await saveOne("deaths", d);
+  closeModal("deathModal");
+  renderAll();
+  toast("Death record saved.");
+}
+async function deleteDeath(uidToDelete){
+  if (!confirm("Delete this death record?")) return;
+  data.deaths = data.deaths.filter(d => d._uid !== uidToDelete);
+  await deleteOne("deaths", uidToDelete);
+  renderAll();
+  toast("Death record deleted.");
+}
+function closeModal(id){ $(id).classList.remove("show"); }
+document.addEventListener("keydown", e => {                // Escape closes whichever modal is currently open — keyboard users had no way to dismiss one otherwise
+  if (e.key !== "Escape") return;
+  document.querySelectorAll(".modal.show").forEach(m => m.classList.remove("show"));
+});
+
+/* ---------- dashboard & demographics ---------- */
+function ageFromDob(dobStr){
+  const d = new Date(dobStr), now = new Date();
+  let age = now.getFullYear() - d.getFullYear();
+  const monthDiff = now.getMonth() - d.getMonth();
+  if (monthDiff < 0 || (monthDiff === 0 && now.getDate() < d.getDate())) age--;
+  return age;
+}
+function daysUntilNextBirthday(dobStr){
+  const d = new Date(dobStr);
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  let next = new Date(today.getFullYear(), d.getMonth(), d.getDate());
+  if (next < today) next.setFullYear(today.getFullYear() + 1);
+  return Math.round((next - today) / 86400000);
+}
+function dashboard(){
+  const now = new Date(), thisMonth = now.getMonth(), thisYear = now.getFullYear();
+  $("dashDay").textContent = now.toLocaleDateString(undefined, { weekday: "long" });
+  $("dashDate").textContent = now.toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" });
+
+  const active = data.members.filter(m => m.status === "Active Member");
+  const families = new Set(active.map(m => m.family).filter(Boolean)).size;
+  const male = active.filter(x => x.gender === "Male").length;
+  const female = active.filter(x => x.gender === "Female").length;
+  const other = active.length - male - female;
+  $("sMembers").textContent = active.length;
+  $("sMembersSub").textContent = data.members.length === active.length ? "Current membership" : data.members.length + " on record in total";
+  $("sFamilies").textContent = families;
+  const baptised = data.members.filter(m => m.baptism && yearOf(m.baptism)).length;
+  $("sBaptised").textContent = baptised;
+  $("sBaptisedSub").textContent = data.members.length ? Math.round(baptised / data.members.length * 100) + "% of all members" : "Members baptised";
+  $("sDepts").textContent = data.departments.length;
+  const todayStr = now.getFullYear() + "-" + String(now.getMonth() + 1).padStart(2, "0") + "-" + String(now.getDate()).padStart(2, "0");
+  const evs = data.churchEvents.filter(ev => ev.date >= todayStr).sort((a, b) => a.date < b.date ? -1 : 1);
+  $("sEvents").textContent = evs.length;
+  $("sEventsSub").textContent = evs.length ? "Next: " + evs[0].title : "Nothing scheduled";
+
+  /* gender donut (blue and gold) */
+  const slices = [["Female", female, "#c99a3f"], ["Male", male, "#173b57"]]; if (other > 0) slices.push(["Other / not set", other, "#9fb4c4"]);
+  const tot = slices.reduce((n, x) => n + x[1], 0), R = 46, C = 2 * Math.PI * R; let off = 0;
+  const arcs = tot ? slices.filter(x => x[1] > 0).map(x => { const len = x[1] / tot * C, a = `<circle cx="60" cy="60" r="${R}" fill="none" stroke="${x[2]}" stroke-width="18" stroke-dasharray="${len} ${C - len}" stroke-dashoffset="${-off}" transform="rotate(-90 60 60)"/>`; off += len; return a; }).join("") : "";
+  $("chGender").innerHTML = `<div class="donutWrap"><svg width="130" height="130" viewBox="0 0 120 120" role="img" aria-label="Gender split"><circle cx="60" cy="60" r="${R}" fill="none" stroke="#e7ecef" stroke-width="18"/>${arcs}<text x="60" y="58" text-anchor="middle" font-family="Fraunces,Georgia,serif" font-size="22" font-weight="600" fill="#0e2537">${tot}</text><text x="60" y="73" text-anchor="middle" font-size="8" fill="#71818f">ACTIVE</text></svg><div class="legend">${slices.map(x => `<div><i style="background:${x[2]}"></i>${x[0]}<b>${x[1]}</b>${tot ? `<small style="color:var(--muted)"> ${Math.round(x[1] / tot * 100)}%</small>` : ""}</div>`).join("")}</div></div>`;
+
+  /* age bar chart */
+  const ag = { "Children<br>0–12": 0, "Youth<br>13–24": 0, "Adults<br>25–59": 0, "Seniors<br>60+": 0 }, keys = Object.keys(ag);
+  active.forEach(m => { if (!usableDate(m.dob)) return; const a = ageFromDob(m.dob); ag[a < 13 ? keys[0] : a < 25 ? keys[1] : a < 60 ? keys[2] : keys[3]]++; });
+  const mx = Math.max(1, ...Object.values(ag));
+  $("chAges").innerHTML = `<div class="vbars">${keys.map(k => `<div class="vbar"><b>${ag[k]}</b><div class="col" style="height:${Math.round(ag[k] / mx * 100)}%"></div></div>`).join("")}</div><div class="vbars" style="height:auto;padding:6px 0 0">${keys.map(k => `<div class="vbar" style="height:auto">${k}</div>`).join("")}</div>`;
+
+  /* this month at a glance */
+  $("glanceMonth").textContent = now.toLocaleDateString(undefined, { month: "long", year: "numeric" });
+  const inMonth = (s) => usableDate(s) && new Date(s).getMonth() === thisMonth;
+  const dayOf = (s) => new Date(s).getDate();
+  const list = (arr, empty) => arr.length ? arr.map(r => `<div class="grow"><span>${r[0]}</span><small>${r[1]}</small></div>`).join("") : `<div class="gempty">${empty}</div>`;
+  const bdays = active.filter(m => inMonth(m.dob)).sort((a, b) => dayOf(a.dob) - dayOf(b.dob)).slice(0, 8)
+    .map(m => [esc(m.name), `${dayOf(m.dob)} ${now.toLocaleDateString(undefined, { month: "short" })}${yearOf(m.dob) ? " · turns " + (thisYear - yearOf(m.dob)) : ""}`]);
+  $("gBirthdays").innerHTML = list(bdays, "No birthdays this month.");
+  const annivs = active.filter(m => inMonth(m.marriageDate)).sort((a, b) => dayOf(a.marriageDate) - dayOf(b.marriageDate)).slice(0, 8)
+    .map(m => [esc(m.name), `${dayOf(m.marriageDate)} ${now.toLocaleDateString(undefined, { month: "short" })}${yearOf(m.marriageDate) && thisYear > yearOf(m.marriageDate) ? " · " + (thisYear - yearOf(m.marriageDate)) + " yrs" : ""}`]);
+  $("gAnniv").innerHTML = list(annivs, "No anniversaries this month.");
+  const joined = data.members.filter(m => usableDate(m.join)).sort((a, b) => a.join < b.join ? 1 : -1).slice(0, 5)
+    .map(m => [esc(m.name), new Date(m.join).toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" })]);
+  $("gNew").innerHTML = list(joined, "No joining dates recorded yet.");
+  const moved = data.members.filter(m => m.transferDirection && usableDate(m.transferDate)).sort((a, b) => a.transferDate < b.transferDate ? 1 : -1).slice(0, 5)
+    .map(m => [esc(m.name) + (m.transferChurch ? `<br><small>${esc(m.transferChurch)}</small>` : ""), new Date(m.transferDate).toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" })]);
+  $("gTransfers").innerHTML = list(moved, "No transfers recorded.");
+
+  /* needs attention */
+  const chk = [["without a phone number", m => !(m.phone || "").trim()], ["without a date of birth", m => !usableDate(m.dob)], ["without a photo", m => !m.photo], ["without a family", m => !(m.family || "").trim()]];
+  $("attention").innerHTML = chk.map(([lbl, f]) => { const n = active.filter(f).length; return n ? `<button onclick="go('members')"><b>${n}</b><small>active member${n === 1 ? "" : "s"} ${lbl}</small></button>` : `<button class="ok" onclick="go('members')"><b>✓</b><small>No members ${lbl}</small></button>`; }).join("");
+}
+function bar(label, n, total){
+  const pct = total ? Math.round(n / total * 100) : 0;
+  return `<div style="margin:9px 0"><div style="display:flex;justify-content:space-between;font-size:12px"><span>${esc(label)}</span><b>${n}</b></div><div style="height:7px;background:#e7ecef;border-radius:8px"><div style="height:100%;width:${pct}%;background:var(--a);border-radius:8px"></div></div></div>`;
+}
+function demo(){
+  const t = data.members.length;
+  const currentYear = new Date().getFullYear();
+  $("demoYear").textContent = currentYear;
+  $("sBirths").textContent = data.members.filter(m => m.dob && new Date(m.dob).getFullYear() === currentYear).length;
+  $("sDeathsYear").textContent = data.deaths.filter(d => d.date && new Date(d.date).getFullYear() === currentYear).length;
+  $("sTransferIn").textContent = data.members.filter(m => m.transferDirection === "Transferred From Church" && m.transferDate && new Date(m.transferDate).getFullYear() === currentYear).length;
+  $("sTransferOut").textContent = data.members.filter(m => m.transferDirection === "Transferred To Church" && m.transferDate && new Date(m.transferDate).getFullYear() === currentYear).length;
+
+  $("gender").innerHTML = bar("Female", data.members.filter(x => x.gender === "Female").length, t) + bar("Male", data.members.filter(x => x.gender === "Male").length, t);
+
+  const ageGroups = { Children: 0, Youth: 0, Adults: 0, Seniors: 0 };
+  data.members.forEach(m => {
+    if (!usableDate(m.dob)) return;
+    const a = ageFromDob(m.dob);
+    if (a < 13) ageGroups.Children++;
+    else if (a < 25) ageGroups.Youth++;
+    else if (a < 60) ageGroups.Adults++;
+    else ageGroups.Seniors++;
+  });
+  $("ages").innerHTML = Object.entries(ageGroups).map(([k, n]) => bar(k, n, t)).join("");
+
+  const statuses = {};
+  data.members.forEach(m => statuses[m.status] = (statuses[m.status] || 0) + 1);
+  $("statuses").innerHTML = Object.entries(statuses).map(([k, n]) => bar(k, n, t)).join("");
+
+  const marital = { Single: 0, Married: 0, Widowed: 0, Widower: 0, Divorced: 0 };
+  data.members.forEach(m => { if (m.marital) marital[m.marital] = (marital[m.marital] || 0) + 1; });
+  $("marital").innerHTML = Object.entries(marital).map(([k, n]) => bar(k, n, t)).join("");
+
+  const baptised = data.members.filter(m => m.baptism).length;
+  $("baptism").innerHTML = bar("Baptised", baptised, t) + bar("Not Baptised", t - baptised, t);
+
+  const locations = {};
+  data.members.forEach(m => { const k = m.location || "Not recorded"; locations[k] = (locations[k] || 0) + 1; });
+  $("locations").innerHTML = Object.entries(locations).map(([k, n]) => bar(k, n, t)).join("");
+}
+
+/* ---------- birthday calendar ---------- */
+function calendar(){
+  const y = cal.getFullYear(), mo = cal.getMonth();
+  const first = new Date(y, mo, 1), daysInMonth = new Date(y, mo + 1, 0).getDate(), startDow = first.getDay();
+  $("month").textContent = cal.toLocaleDateString(undefined, { month: "long", year: "numeric" });
+
+  const byDay = new Map();   // pre-bucket members by day-of-month once, instead of scanning all members per calendar cell
+  data.members.forEach(m => {
+    if (!usableDate(m.dob)) return;
+    const d = new Date(m.dob);
+    if (d.getMonth() !== mo) return;
+    const day = d.getDate();
+    if (!byDay.has(day)) byDay.set(day, []);
+    byDay.get(day).push(m.name);
+  });
+
+  let h = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map(x => `<div class="day dow">${x}</div>`).join("");
+  for (let i = 0; i < startDow; i++) h += "<div></div>";
+  for (let d = 1; d <= daysInMonth; d++){
+    const names = byDay.get(d) || [];
+    h += `<div class="day"><b>${d}</b>${names.map(n => `<span class="birthday">🎂 ${esc(n)}</span>`).join("")}</div>`;
+  }
+  $("calendar").innerHTML = h;
+}
+function moveMonth(n, toToday){
+  if (toToday) cal = new Date();
+  else cal.setMonth(cal.getMonth() + n);
+  calendar();
+}
+
+/* ---------- sortable birthday list ---------- */
+let birthdaySort = { key: "dob", dir: 1 };
+function sortBirthdays(key){
+  birthdaySort.dir = (birthdaySort.key === key) ? -birthdaySort.dir : 1;
+  birthdaySort.key = key;
+  renderBirthdayList();
+}
+function renderBirthdayList(){
+  const rows = data.members.filter(m => usableDate(m.dob)).sort((a, b) => {
+    const va = birthdaySort.key === "dob" ? a.dob.slice(5) : a.name.toLowerCase();
+    const vb = birthdaySort.key === "dob" ? b.dob.slice(5) : b.name.toLowerCase();
+    return va < vb ? -1 * birthdaySort.dir : va > vb ? 1 * birthdaySort.dir : 0;
+  });
+  $("birthdayRows").innerHTML = rows.map(m => `<tr>
+    <td><b>${esc(m.name)}</b></td>
+    <td>${esc(m.family) || "—"}</td>
+    <td>${esc(m.phone) || "—"}</td>
+    <td>${esc(fmtD(m.dob))}</td>
+  </tr>`).join("") || `<tr><td colspan="4">No birthdays on record.</td></tr>`;
+  ["name", "dob"].forEach(k => { $("sortArrow-" + k).textContent = birthdaySort.key === k ? (birthdaySort.dir === 1 ? " ▲" : " ▼") : ""; });
+}
+
+/* ---------- backup / restore / settings ---------- */
+async function backup(){
+  try{
+    if (window.churchAPI && window.churchAPI.exportData) {
+      const ok = await window.churchAPI.exportData();
+      if (!ok) return;
+    } else {
+      const obj = { app: "Gorkha Baptist Church Management System", version: "3.1", exportedAt: new Date().toISOString(), data: stripInternal(data) };
+      const blob = new Blob([JSON.stringify(obj, null, 2)], { type: "application/json" });
+      const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+      a.download = "Gorkha-Baptist-Church-Backup-" + new Date().toISOString().slice(0,10) + ".json";
+      a.click(); URL.revokeObjectURL(a.href);
+    }
+    localStorage.gbcLastBackup = new Date().toLocaleString(); backupInfo(); toast("Backup exported successfully.");
+  }catch(err){ console.error(err); toast("Backup export failed.", true); }
+}
+function stripInternal(d){ return d; }  // kept as a hook in case internal fields should be excluded from exports later
+async function restoreBackup(e){
+  const f = e.target.files[0];
+  if (!f) return;
+  const r = new FileReader();
+  r.onload = async () => {
+    try{
+      const parsed = JSON.parse(r.result);
+      const incoming = parsed.data || parsed;
+      if (!incoming.members || !incoming.deaths || !incoming.settings) throw new Error("bad shape");
+      if (!confirm("Restore this backup? Current data will be replaced.")) return;
+      data = incoming;
+      data.members.forEach(m => { if (!m._uid) m._uid = uid(); });
+      data.deaths.forEach(d => { if (!d._uid) d._uid = uid(); });
+      if (!data.leaders) data.leaders = [];
+      if (!data.churchWorkers) data.churchWorkers = [];
+      if (!data.paidWorkers) data.paidWorkers = [];
+      if (!data.departments) data.departments = [];
+      if (!data.churchEvents) data.churchEvents = [];
+      if (!data.churchHistory) data.churchHistory = [];
+      data.departments.forEach(x => { if (!x._uid) x._uid = uid(); if (!x.memberUids) x.memberUids = []; });
+      data.churchEvents.forEach(x => { if (!x._uid) x._uid = uid(); });
+      data.churchHistory.forEach(x => { if (!x._uid) x._uid = uid(); });
+      if (data.workers){                                        // one-time migration: old combined "workers" list → split by category into the two new modules
+        data.workers.forEach(x => { (x.category === "Paid Worker" ? data.paidWorkers : data.churchWorkers).push(x); });
+        delete data.workers;
+      }
+      data.leaders.forEach(x => { if (!x._uid) x._uid = uid(); });
+      data.churchWorkers.forEach(x => { if (!x._uid) x._uid = uid(); });
+      data.paidWorkers.forEach(x => { if (!x._uid) x._uid = uid(); });
+      data.members.forEach(m => { if (m.status === "Active") m.status = "Active Member"; });  // one-time migration: old plain "Active" status → "Active Member"
+      if (!data.families) data.families = [];
+      const knownNames = new Set(data.families.map(f => f.name));
+      data.members.forEach(m => { const n = (m.family || "").trim(); if (n && !knownNames.has(n)) { knownNames.add(n); data.families.push({ _uid: uid(), famId: nextFamilyId(), name: n }); } });
+      data.settings = { ...DEFAULT_SETTINGS, ...(data.settings || {}) };  // same defaults-merge as boot(), so an older/partial backup can't leave name/colors undefined
+      if (!data.auth){ const { hash, salt } = await deriveHash("admin123"); data.auth = { username: "admin", passwordHash: hash, salt, isDefault: true }; }  // older backups predate login credentials
+      await persist();
+      initApp();
+      go("backup");
+      toast("Backup restored.");
+    }catch(err){
+      toast("Invalid church backup file.", true);
+    }
+  };
+  r.readAsText(f);
+}
+function backupInfo(){
+  const el = $("backupInfo");
+  if (el) el.innerHTML = `<p>Members: <b>${data.members.length}</b> · Death records: <b>${data.deaths.length}</b> · Last backup: <b>${esc(localStorage.gbcLastBackup || "Not yet")}</b></p>`;
+}
+async function changeLogo(e){
+  const f = e.target.files[0];
+  if (!f) return;
+  if (f.size > MAX_PHOTO_BYTES) return toast("Logo must be under 5 MB.", true);
+  let compressed;
+  try{ compressed = await compressImage(f, PHOTO_MAX_DIM, PHOTO_QUALITY); }
+  catch(err){ console.error(err); toast("Could not process that image.", true); return; }
+  try{
+    if (isElectron()){
+      const saved = await withTimeout(window.churchAPI.saveFile("settings", "global", compressed, "logo.jpg", true), 15000, "Saving logo");
+      data.settings.logo = saved.path;
+    } else {
+      data.settings.logo = compressed;
+    }
+    await saveSettingsPersist();
+    refresh();
+  } catch(err){
+    console.error(err);
+    if (/taking too long/.test(err.message || "")) toast(err.message, true);
+  }
+}
+async function saveSettings(){
+  data.settings.name = $("setName").value;
+  data.settings.motto = $("setMotto").value;
+  data.settings.location = $("setLoc").value;
+  data.settings.registrationNo = $("setReg").value;
+  data.settings.established = $("setEst").value;
+  data.settings.email = $("setEmail").value;
+  data.settings.phone = $("setPhone").value;
+  data.settings.primary = $("setP").value;
+  data.settings.accent = $("setA").value;
+  await saveSettingsPersist();
+  refresh();
+  toast("Church settings saved.");
+}
+async function changeCredentials(){
+  const cur = $("curPass").value;
+  const newUser = $("newUser").value.trim();
+  const newPass = $("newPass").value;
+  const confirmVal = $("confirmPass").value;
+  if (!cur) return toast("Enter your current password to confirm changes.", true);
+  if (!(await verifyPassword(cur, data.auth)).ok) return toast("Current password is incorrect.", true);
+  if (!newUser) return toast("Username cannot be blank.", true);
+  if (newPass || confirmVal){
+    if (newPass.length < 6) return toast("New password must be at least 6 characters.", true);
+    if (newPass !== confirmVal) return toast("New passwords do not match.", true);
+    const { hash, salt } = await deriveHash(newPass);
+    data.auth.passwordHash = hash; data.auth.salt = salt;
+  }
+  data.auth.username = newUser;
+  data.auth.isDefault = false;
+  await saveAuthPersist();
+  $("curPass").value = ""; $("newPass").value = ""; $("confirmPass").value = "";
+  $("defaultCredBanner").style.display = "none";
+  toast("Login credentials updated.");
+}
+async function resetData(){
+  if (!confirm("Reset all records to an empty system? This cannot be undone.")) return;
+  const auth = data.auth;                     // keep current login credentials through a data reset
+  data = emptyData();
+  if (auth) data.auth = auth;
+  else { const { hash, salt } = await deriveHash("admin123"); data.auth = { username: "admin", passwordHash: hash, salt, isDefault: true }; }
+  await persist();
+  initApp();
+}
+
+/* ---------- CSV export ---------- */
+function exportCSV(){
+  const headers = ["Member ID","Name","Gender","DOB","Phone","Email","Family","Father's Name","Mother's Name","Birth Certificate No.","Marital Status","Baptism Date","Baptism Minister","Dedication Date","Dedication Minister","Marriage Date","Marriage Minister","Marriage Type","Marriage Place","Membership Date","Occupation","Education","Next of Kin","Relationship","Location","Home Address","Status","Transfer Direction","Transfer Date","Transfer Reason","Transfer Church","Transfer Status"];
+  const q = x => `"${String(x ?? "").replace(/"/g, '""')}"`;
+  const rows = data.members.map(m => [m.id,m.name,m.gender,fmtD(m.dob),m.phone,m.email,m.family,m.fatherName,m.motherName,m.certNo,m.marital,fmtD(m.baptism),m.baptismMinister,fmtD(m.dedication),m.dedicationMinister,fmtD(m.marriageDate),m.marriageMinister,m.marriageType||"",m.marriagePlace||"",fmtD(m.join),m.occupation,m.education,m.nextKin,m.kinRelation,m.location,m.address,m.status,m.transferDirection||"",fmtD(m.transferDate)||"",m.transferReason||"",m.transferChurch||"",m.transferStatus||""].map(q).join(","));
+  const blob = new Blob([[headers.map(q).join(","), ...rows].join("\n")], { type: "text/csv" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "Gorkha-Baptist-Church-Members.csv";
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+/* ---------- print reports ---------- */
+function printShell(title, body){
+  const w = window.open("", "_blank");
+  if (!w) return toast("Please allow pop-ups to print.", true);
+  const regLine = (data.settings.registrationNo || data.settings.established)
+    ? `<div style="font-size:10px;color:#78858e;margin-top:2px">${data.settings.registrationNo ? "Reg. No: " + esc(data.settings.registrationNo) : ""}${data.settings.registrationNo && data.settings.established ? " · " : ""}${data.settings.established ? "Estd. " + esc(data.settings.established) : ""}</div>`
+    : "";
+  const contactLine = (data.settings.email || data.settings.phone)
+    ? `<div style="font-size:10px;color:#78858e;margin-top:2px">${data.settings.phone ? "Tel: " + esc(data.settings.phone) : ""}${data.settings.phone && data.settings.email ? " · " : ""}${data.settings.email ? esc(data.settings.email) : ""}</div>`
+    : "";
+  w.document.write(`<html><head><title>${esc(title)}</title><style>@page{size:A4;margin:15mm}body{font-family:Arial;color:#203040}.head{text-align:center;border-bottom:3px solid ${data.settings.primary};padding-bottom:12px}.head img{width:65px;height:65px;object-fit:contain}.head h2{margin:5px}.head .motto{font-style:italic;font-size:11px;color:#78858e;margin:0 0 4px}.head h3{color:${data.settings.accent}}table{width:100%;border-collapse:collapse;margin-top:18px}th,td{border:1px solid #ddd;padding:7px;font-size:11px;text-align:left}th{background:#e9edf2;color:#000;font-weight:700}footer{margin-top:30px;font-size:9px;color:#78858e}.pmhead{display:flex;gap:16px;align-items:center;margin:14px 0 20px}.pmphoto{width:100px;height:125px;object-fit:cover;border-radius:6px;border:1px solid #ccc;flex-shrink:0}.pmphoto-empty{display:flex;align-items:center;justify-content:center;color:#999;font-size:11px;background:#f2f2f2}.pmstatus{background:#e7f2f0;color:#286b65;padding:3px 9px;border-radius:12px;font-size:10px;font-weight:700}.pmgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px 30px}.pmgrid h4{margin:0 0 6px;color:${data.settings.accent};font-size:12px;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid #eee;padding-bottom:4px}.pmrow{display:flex;justify-content:space-between;font-size:11.5px;padding:4px 0;border-bottom:1px dotted #eee}.pmlabel{color:#667}.pmval{font-weight:600;text-align:right}.pmnotes{margin-top:18px;font-size:11.5px}.pmnotetext{white-space:pre-wrap;text-align:justify;line-height:1.6;margin:0;overflow-wrap:anywhere}.pmnotes h4{margin:0 0 6px;color:${data.settings.accent};font-size:12px;text-transform:uppercase;border-bottom:1px solid #eee;padding-bottom:4px}.pmtimeline{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:14px 0;padding:10px 12px;background:#f7f7f2;border:1px solid #e6e6dc;border-radius:8px;font-size:11px}.pmt-arrow{color:#aaa}</style></head><body><div class="head"><img src="${photoUrl(data.settings.logo) || logoFallback()}" alt="${esc(data.settings.name)} logo"><h2>${esc(data.settings.name)}</h2>${data.settings.motto ? `<div class="motto">${esc(data.settings.motto)}</div>` : ""}<div>${esc(data.settings.location)}</div>${regLine}${contactLine}<h3>${esc(title)}</h3></div>${body}<footer>Generated ${new Date().toLocaleString()} · Confidential Church Record</footer><script>onload=()=>setTimeout(()=>print(),200)<\/script></body></html>`);
+  w.document.close();
+}
+function printMember(memberUid){
+  const m = membersById.get(memberUid) || data.members.find(x => x._uid === memberUid);
+  if (!m) return toast("Save the member first, then print.", true);
+  const row = (label, val) => `<div class="pmrow"><span class="pmlabel">${esc(label)}</span><span class="pmval">${esc(val) || "—"}</span></div>`;
+  const timelineEvents = memberTimeline(m);
+  const timelineHtml = timelineEvents.length
+    ? `<div class="pmtimeline">${timelineEvents.map(e => { const y = yearOf(e.date); return `<span class="pmt-item">${esc(e.label)} — <b>${y || esc(e.date)}</b></span>`; }).join(`<span class="pmt-arrow">→</span>`)}</div>`
+    : "";
+  const body = `
+    <div class="pmhead">
+      ${m.photo ? `<img class="pmphoto" src="${photoUrl(m.photo)}" alt="${esc(m.name)}">` : `<div class="pmphoto pmphoto-empty">No Photo</div>`}
+      <div><h2 style="margin:0">${esc(m.name)}</h2><p style="margin:4px 0"><b>Member ID:</b> ${esc(m.id)} &nbsp; <span class="pmstatus">${esc(m.status)}</span></p></div>
+    </div>
+    ${timelineHtml}
+    <div class="pmgrid">
+      <div><h4>Personal</h4>${row("Gender", m.gender)}${row("Date of Birth", fmtD(m.dob))}${row("Marital Status", m.marital)}${row("Occupation", m.occupation)}${row("Education", m.education)}</div>
+      <div><h4>Church Record</h4>${row("Baptism Date", fmtD(m.baptism))}${row("Baptism Minister", m.baptismMinister)}${row("Dedication Date", fmtD(m.dedication))}${row("Dedication Minister", m.dedicationMinister)}${row("Marriage Date", fmtD(m.marriageDate))}${row("Marriage Minister", m.marriageMinister)}${row("Marriage Type", m.marriageType)}${row("Marriage Place", m.marriagePlace)}${row("Membership Date", fmtD(m.join))}${row("Family", m.family)}${row("Village / Town", m.location)}</div>
+      <div><h4>Contact</h4>${row("Phone", m.phone)}${row("Email", m.email)}${row("Home Address", m.address)}</div>
+      <div><h4>Next of Kin</h4>${row("Next of Kin", m.nextKin)}${row("Relationship", m.kinRelation)}</div>
+    </div>
+    <div><h4>Member Transfer Information</h4>
+      ${row("Transfer Direction", m.transferDirection)}
+      ${row("Church Name", m.transferChurch)}
+      ${row("Transfer Date", fmtD(m.transferDate))}
+      ${row("Reason for Transfer", m.transferReason)}
+      ${row("Transfer Status", m.transferStatus)}
+    </div>
+    <div class="pmnotes"><h4>Address / Notes</h4><p class="pmnotetext">${esc(m.notes) || "—"}</p></div>`;
+  printShell("MEMBER PROFILE — " + m.name, body);
+}
+function ordinalDate(dateStr){                  // "2025-09-05" -> "5th Sept 2025", matching the church's printed certificate style
+  if (!dateStr) return "";
+  if (!usableDate(dateStr)) return fmtD(dateStr);
+  const d = new Date(dateStr);
+  if (isNaN(d)) return dateStr;
+  const day = d.getDate();
+  const suffix = (day % 10 === 1 && day !== 11) ? "st" : (day % 10 === 2 && day !== 12) ? "nd" : (day % 10 === 3 && day !== 13) ? "rd" : "th";
+  return day + suffix + " " + d.toLocaleDateString(undefined, { month: "short" }) + " " + d.getFullYear();
+}
+function printBirthCertificate(memberUid){
+  const m = membersById.get(memberUid) || data.members.find(x => x._uid === memberUid);
+  if (!m) return toast("Save the member first, then print.", true);
+  const w = window.open("", "_blank");
+  if (!w) return toast("Please allow pop-ups to print.", true);
+  const fill = v => v ? esc(v) : "&nbsp;";
+  const fillDate = v => v ? esc(ordinalDate(v)) : "&nbsp;";
+  w.document.write(`<html><head><title>Birth Certificate — ${esc(m.name)}</title><style>
+    @page{size:A4 portrait;margin:16mm}
+    body{font-family:Georgia,'Times New Roman',serif;color:#1a2740}
+    .frame{border:3px double #1a2740;padding:24px 34px;box-sizing:border-box;position:relative;min-height:calc(100vh - 32mm)}
+    .slno{position:absolute;top:22px;left:30px;font-size:13px;color:#a83232;font-weight:700}
+    .hdr{text-align:center}
+    .hdr .the{font-size:13px;letter-spacing:5px;font-weight:700}
+    .hdr .churchname{font-size:28px;font-weight:800;letter-spacing:1.5px;margin:2px 0 4px;color:#1a2740}
+    .hdr .place{font-size:18px;font-weight:700;letter-spacing:1px;margin-bottom:3px}
+    .hdr .tagline{font-style:italic;font-size:12px;margin-bottom:6px}
+    .hdr .addr{font-size:11px;line-height:1.5;color:#333}
+    .hdr .verse{font-size:11.5px;font-weight:700;margin-top:6px}
+    .hdr img{width:64px;height:64px;object-fit:contain;display:block;margin:0 auto 6px}
+    .title{text-align:center;font-size:25px;font-weight:700;margin:18px 0 24px;text-decoration:underline;letter-spacing:1px}
+    .body{font-size:15px;line-height:2.6;margin-top:8px}
+    .fill{display:inline-block;min-width:140px;border-bottom:1px dotted #1a2740;text-align:center;padding:0 6px;font-weight:600}
+    .sigs{display:flex;justify-content:space-between;margin-top:90px;padding:0 20px}
+    .sig{text-align:center;font-size:12px}
+    .sig .line{border-top:1px solid #1a2740;width:190px;margin-bottom:4px}
+  </style></head><body>
+  <div class="frame">
+    <div class="slno">Sl. No. <span class="fill" style="min-width:80px">${fill(m.certNo)}</span></div>
+    <div class="hdr">
+      <img src="${photoUrl(data.settings.logo) || logoFallback()}" alt="${esc(data.settings.name)} logo">
+      <div class="the">THE</div>
+      <div class="churchname">${esc(data.settings.name.toUpperCase())}</div>
+      <div class="place">${esc(data.settings.location.toUpperCase())}</div>
+      ${data.settings.motto ? `<div class="tagline">(${esc(data.settings.motto)})</div>` : ""}
+      <div class="addr">${data.settings.established ? "Estd. " + esc(data.settings.established) : ""}</div>
+      <div class="verse">'Lo, children are an heritage of the LORD' Ps. 127:3</div>
+    </div>
+    <div class="title">Birth Certificate</div>
+    <div class="body">
+      This is to certify that Baby <span class="fill">${fill(m.name)}</span><br>
+      S/o, D/o, Mr. <span class="fill">${fill(m.fatherName)}</span> and Mrs. <span class="fill">${fill(m.motherName)}</span><br>
+      an inhabitant of <span class="fill">${fill(m.address || m.location)}</span><br>
+      born on <span class="fill">${fillDate(m.dob)}</span> has been dedicated to the Lord at this Church on this<br>
+      day of the Lord <span class="fill">${fillDate(m.dedication)}</span> By <span class="fill">${fill(m.dedicationMinister)}</span>
+    </div>
+    <div class="sigs">
+      <div class="sig"><div class="line"></div>Secretary</div>
+      <div class="sig"><div class="line"></div>Minister</div>
+    </div>
+  </div>
+  <script>onload=()=>setTimeout(()=>print(),200)<\/script>
+  </body></html>`);
+  w.document.close();
+}
+function printReport(type){
+  const from = ($("rptFrom") && $("rptFrom").value) || "";
+  const to = ($("rptTo") && $("rptTo").value) || "";
+  const inRange = d => { if (!d) return false; if (from && d < from) return false; if (to && d > to) return false; return true; };
+  const rangeLabel = (from || to) ? ` — ${from || "start"} to ${to || "today"}` : "";
+  let title = "", body = "";
+  if (type === "members"){
+    title = "MEMBER REGISTER";
+    body = `<table><tr><th>ID</th><th>Name</th><th>Gender</th><th>DOB</th><th>Phone</th><th>Family</th><th>Status</th></tr>${data.members.map(m => `<tr><td>${esc(m.id)}</td><td>${esc(m.name)}</td><td>${esc(m.gender)}</td><td>${esc(fmtD(m.dob))}</td><td>${esc(m.phone)}</td><td>${esc(m.family)}</td><td>${esc(m.status)}</td></tr>`).join("")}</table>`;
+  } else if (type === "newMembers"){
+    title = "NEW MEMBERS REPORT" + rangeLabel;
+    const list = data.members.filter(m => inRange(m.join)).sort((a, b) => a.join < b.join ? -1 : a.join > b.join ? 1 : 0);
+    body = `<p>Total new members in period: <b>${list.length}</b></p><table><tr><th>ID</th><th>Name</th><th>Join Date</th><th>Family</th><th>Phone</th></tr>${list.map(m => `<tr><td>${esc(m.id)}</td><td>${esc(m.name)}</td><td>${esc(fmtD(m.join))}</td><td>${esc(m.family)}</td><td>${esc(m.phone)}</td></tr>`).join("") || `<tr><td colspan="5">No members joined in this period.</td></tr>`}</table>`;
+  } else if (type === "transfers"){
+    title = "TRANSFER IN / OUT REPORT" + rangeLabel;
+    const transferredIn = data.members.filter(m => m.transferDirection === "Transferred From Church" && inRange(m.transferDate));
+    const transferredOut = data.members.filter(m => m.transferDirection === "Transferred To Church" && inRange(m.transferDate));
+    const rowsFor = (list, churchLabel) => list.map(m => `<tr><td>${esc(m.id)}</td><td>${esc(m.name)}</td><td>${esc(fmtD(m.transferDate))}</td><td>${esc(m.transferChurch)}</td><td>${esc(m.transferStatus)}</td></tr>`).join("") || `<tr><td colspan="5">None in this period.</td></tr>`;
+    body = `<p>Transferred In: <b>${transferredIn.length}</b> &nbsp;·&nbsp; Transferred Out: <b>${transferredOut.length}</b></p>
+      <h3>Transferred In (from another church)</h3><table><tr><th>ID</th><th>Name</th><th>Date</th><th>From Church</th><th>Status</th></tr>${rowsFor(transferredIn)}</table>
+      <h3 style="margin-top:20px">Transferred Out (to another church)</h3><table><tr><th>ID</th><th>Name</th><th>Date</th><th>To Church</th><th>Status</th></tr>${rowsFor(transferredOut)}</table>`;
+  } else if (type === "birthdays"){
+    title = "BIRTHDAY REPORT";
+    const sorted = data.members.filter(m => usableDate(m.dob)).sort((a, b) => a.dob.slice(5).localeCompare(b.dob.slice(5)));
+    body = `<table><tr><th>Name</th><th>DOB</th><th>Family</th><th>Phone</th></tr>${sorted.map(m => `<tr><td>${esc(m.name)}</td><td>${esc(fmtD(m.dob))}</td><td>${esc(m.family)}</td><td>${esc(m.phone)}</td></tr>`).join("")}</table>`;
+  } else if (type === "deaths"){
+    title = "DEATH REGISTER" + rangeLabel;
+    const membersByBizId = new Map(data.members.map(m => [m.id, m]));
+    const list = data.deaths.filter(d => inRange(d.date));
+    body = `<table><tr><th>Member</th><th>DOB</th><th>Death Date</th><th>Place</th><th>Notes</th></tr>${list.map(d => { const m = membersByBizId.get(d.member); return `<tr><td>${esc(m ? m.name : d.member)}</td><td>${esc(fmtD(m ? m.dob : ""))}</td><td>${esc(fmtD(d.date))}</td><td>${esc(d.place)}</td><td>${esc(d.notes)}</td></tr>`; }).join("") || `<tr><td colspan="5">No deaths recorded in this period.</td></tr>`}</table>`;
+  } else {
+    title = "DEMOGRAPHIC SUMMARY";
+    const currentYear = new Date().getFullYear();
+    const marital = { Single: 0, Married: 0, Widowed: 0, Widower: 0, Divorced: 0 };
+    data.members.forEach(m => { if (m.marital) marital[m.marital] = (marital[m.marital] || 0) + 1; });
+    const baptised = data.members.filter(m => m.baptism).length;
+    const notBaptised = data.members.length - baptised;
+    const births = data.members.filter(m => m.dob && new Date(m.dob).getFullYear() === currentYear).length;
+    const deathsThisYear = data.deaths.filter(d => d.date && new Date(d.date).getFullYear() === currentYear).length;
+    const transferIn = data.members.filter(m => m.transferDirection === "Transferred From Church" && m.transferDate && new Date(m.transferDate).getFullYear() === currentYear).length;
+    const transferOut = data.members.filter(m => m.transferDirection === "Transferred To Church" && m.transferDate && new Date(m.transferDate).getFullYear() === currentYear).length;
+    const stat = (label, val) => `<div style="display:flex;justify-content:space-between;max-width:420px;padding:3px 0;font-size:13px"><span>${esc(label)}</span><span><b>: ${esc(val)}</b></span></div>`;
+    body = `<h3>Vital Statistics — ${currentYear}</h3>
+    ${stat("Births", births)}${stat("Deaths", deathsThisYear)}${stat("Transferred In", transferIn)}${stat("Transferred Out", transferOut)}
+    <h3>Membership Summary</h3>
+    ${stat("Total members", data.members.length)}${stat("Active members", data.members.filter(m => m.status === "Active Member").length)}${stat("Families", new Set(data.members.map(m => m.family).filter(Boolean)).size)}${stat("Male", data.members.filter(m => m.gender === "Male").length)}${stat("Female", data.members.filter(m => m.gender === "Female").length)}
+    <h3>Baptism</h3>
+    ${stat("Baptised members", baptised)}${stat("Not Baptised", notBaptised)}
+    <h3>Marital Status</h3>
+    ${stat("Single", marital.Single)}${stat("Married", marital.Married)}${stat("Widowed", marital.Widowed)}${stat("Widower", marital.Widower)}${stat("Divorced", marital.Divorced)}`;
+  }
+  printShell(title, body);
+}
+function idCardStyles(){                        // shared card layout used by every ID-card print, matching the church's printed card format
+  return `
+    @page{size:A4;margin:10mm}
+    body{font-family:Arial}
+    .sheet{display:flex;flex-wrap:wrap;gap:0.2in}
+    .idcard{width:3.370in;height:2.125in;box-sizing:border-box;border:1px solid ${data.settings.primary};border-radius:0.1in;padding:0.1in;display:flex;flex-direction:column;overflow:hidden;break-inside:avoid}
+    .cardhead{display:flex;align-items:flex-start;gap:0.06in;border-bottom:1px solid #ddd;padding-bottom:0.03in;margin-bottom:0.03in}
+    .cardhead img{width:0.36in;height:0.36in;object-fit:contain;border-radius:50%;background:#fff;flex-shrink:0}
+    .cardhead div{overflow:hidden;flex:1}
+    .cardhead b{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;font-size:7.6pt;color:${data.settings.primary};line-height:1.1;white-space:normal;overflow:hidden}
+    .cardhead span{display:block;font-size:5.8pt;color:#777;white-space:normal;line-height:1.15;margin-top:0.01in}
+    .cardbody{display:flex;gap:0.08in;flex:1;min-height:0}
+    .cardphoto{width:0.85in;height:1.08in;object-fit:cover;border-radius:0.035in;border:1px solid #ccc;flex-shrink:0}
+    .cardphoto-empty{display:flex;align-items:center;justify-content:center;color:#999;font-size:6pt;background:#f2f2f2;text-align:center}
+    .carddetails{font-size:7pt;line-height:1.28;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+    .cdrow{display:flex;white-space:nowrap}
+    .cdl{width:0.46in;flex-shrink:0;color:#555}
+    .cdv{font-weight:700;overflow:hidden;text-overflow:ellipsis}
+    .cdstatus{margin-top:0.03in;font-weight:700;color:${data.settings.accent};font-size:7.3pt}
+    .cardfoot{font-size:4.6pt;color:#888;text-align:center;border-top:1px solid #eee;padding-top:0.03in;margin-top:auto}`;
+}
+function idCardHtml(photo, name, rows, statusText, footerText){
+  return `<div class="idcard">
+    <div class="cardhead"><img src="${photoUrl(data.settings.logo) || logoFallback()}" alt="${esc(data.settings.name)} logo"><div><b>${esc(data.settings.name)}</b><span>${esc(data.settings.location)}</span></div></div>
+    <div class="cardbody">
+      ${photo ? `<img class="cardphoto" src="${photoUrl(photo)}" alt="${esc(name)}">` : `<div class="cardphoto cardphoto-empty">PHOTO</div>`}
+      <div class="carddetails">
+        ${rows.map(([l, v]) => `<div class="cdrow"><span class="cdl">${esc(l)}</span>:&nbsp;<span class="cdv">${esc(v) || ""}</span></div>`).join("")}
+        ${statusText ? `<div class="cdstatus">${esc(statusText)}</div>` : ""}
+      </div>
+    </div>
+    <div class="cardfoot">${esc(footerText)}</div>
+  </div>`;
+}
+function openCardSheet(cardsHtml){
+  const w = window.open("", "_blank");
+  if (!w) return toast("Please allow pop-ups to print.", true);
+  w.document.write(`<html><head><style>${idCardStyles()}</style></head><body><div class="sheet">${cardsHtml}</div><script>onload=()=>setTimeout(()=>print(),200)<\/script></body></html>`);
+  w.document.close();
+}
+function printCards(){
+  const cards = data.members.map(m => idCardHtml(m.photo, m.name, [
+    ["ID", m.id],
+    ["Name", m.name],
+    ["DOB", fmtD(m.dob)],
+    ["Gender", m.gender],
+    ["Family", m.family],
+    ["Phone", m.phone]
+  ], m.status, data.settings.name + " Membership Card")).join("");
+  openCardSheet(cards);
+}
+function printRosterCards(type){                // Deacon Board / Church Workers / Paid Workers — same card format as Member ID Cards
+  const cfg = ROSTER_TYPES[type];
+  const hasCategory = cfg.categories.length > 0;
+  const cards = data[type].map(x => idCardHtml(x.photo, x.name, [
+    ["ID", x.id],
+    ["Name", x.name],
+    ...(hasCategory ? [["Category", x.category]] : []),
+    ["Role", x.role || (hasCategory ? "" : cfg.title)],
+    ["Phone", x.phone]
+  ], x.status, cfg.title + " ID Card")).join("");
+  openCardSheet(cards);
+}
+
+initDateInputs();
+boot();
+</script>
+</body>
+</html>
