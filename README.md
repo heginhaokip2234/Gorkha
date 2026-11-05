@@ -1,8 +1,8 @@
-# Gorkha Baptist Church Management System V3
+# Gorkha Christian Church Management System V3
 
 ## Architecture
 - Electron Windows desktop application
-- SQLite database: `gorkha-baptist-church-v3.db`
+- SQLite database: `gorkha-christian-church-v3.db`
 - WAL mode and foreign-key support
 - Existing membership interface retained
 - Core records normalized into separate SQLite tables
